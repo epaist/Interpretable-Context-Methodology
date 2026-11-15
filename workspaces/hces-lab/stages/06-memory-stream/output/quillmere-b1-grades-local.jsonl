@@ -1,0 +1,58 @@
+{"id": "qb-q13", "verdict": "abstained", "reason": "The answer explicitly states that the information is not specified in the provided notes, whereas the expected answer confirms a specific authority ('Supervisor'). Since the model claims it does not know the answer rather than providing an incorrect or stale value, the correct classification is 'abstained'.", "cost": 0.0}
+{"id": "qb-q45", "verdict": "correct", "reason": "The answer explicitly states 'Script v2', which matches the expected value for the date 2026-10-05.", "cost": 0.0}
+{"id": "qb-q11", "verdict": "correct", "reason": "The answer 'v1' matches the expected value for the specified date (2026-02-15).", "cost": 0.0}
+{"id": "qb-q40", "verdict": "correct", "reason": "The answer provides the expected value (1-888-555-0177) for the specified date (2026-09-07).", "cost": 0.0}
+{"id": "qb-q50", "verdict": "wrong", "reason": "The answer states that version 5 is in force, but the expected value is version 6. Since version 5 is listed as one of the 'other values at other times' and not the expected current value, the answer is incorrect.", "cost": 0.0}
+{"id": "qb-q34", "verdict": "correct", "reason": "The answer explicitly states that outage credits are calculated 'hourly after the connection has been down for 4 hours,' which matches the expected value exactly.", "cost": 0.0}
+{"id": "qb-q30", "verdict": "correct", "reason": "The answer explicitly states '12 or 24-month contract terms', which matches the expected value exactly.", "cost": 0.0}
+{"id": "qb-q17", "verdict": "correct", "reason": "The answer provided ($20) matches the expected value for the specified date (2026-03-20).", "cost": 0.0}
+{"id": "qb-q01", "verdict": "correct", "reason": "The answer explicitly states '12 months', which matches the expected value provided for the date 2026-01-06.", "cost": 0.0}
+{"id": "qb-q20", "verdict": "correct", "reason": "The answer explicitly states 'fifty megabits per second', which matches the expected value of 50 Mbps.", "cost": 0.0}
+{"id": "qb-q25", "verdict": "stale", "reason": "The answer provides 'v1', which is listed in the 'Other values at other times' rather than the expected value 'v3'.", "cost": 0.0}
+{"id": "qb-q12", "verdict": "correct", "reason": "The answer explicitly states '$10', which matches the expected value of '$10/mo' for the specified date.", "cost": 0.0}
+{"id": "qb-q09", "verdict": "correct", "reason": "The answer explicitly states 'seventy-five dollars', which matches the expected value of $75 for a customer-caused fault.", "cost": 0.0}
+{"id": "qb-q29", "verdict": "abstained", "reason": "The answer explicitly states 'Not in memory,' indicating the model does not know the information rather than providing an incorrect or outdated value.", "cost": 0.0}
+{"id": "qb-q58", "verdict": "correct", "reason": "The answer explicitly states that fiber service is available in Dunmore as of the specified date (2026-12-18), which matches the expected value. It also acknowledges the other values (Alder and Brook) as earlier or disputed, correctly distinguishing them from the current fact.", "cost": 0.0}
+{"id": "qb-q51", "verdict": "correct", "reason": "The answer explicitly states '21 days', which matches the expected value provided for the date 2026-10-30.", "cost": 0.0}
+{"id": "qb-q22", "verdict": "correct", "reason": "The answer explicitly confirms that month-to-month service is available, which aligns with the expected value 'Month-to-month is available on every plan'. The additional detail about paying one month at a time supports this confirmation.", "cost": 0.0}
+{"id": "qb-q39", "verdict": "correct", "reason": "The answer explicitly states that 'PayPal is the accepted payment method', which directly matches the expected value 'Adds PayPal'. Although the answer omits the other methods mentioned in the 'Other values' list, it correctly identifies the specific update requested by the question and expected value.", "cost": 0.0}
+{"id": "qb-q23", "verdict": "correct", "reason": "The answer explicitly states that 'Script v1' is the version in force, which matches the expected value 'v1' provided in the prompt.", "cost": 0.0}
+{"id": "qb-q32", "verdict": "correct", "reason": "The answer explicitly states that the fee is 'waived', which matches the expected value. The mention of '$25' refers to a specific condition (manual restores) or a historical context, but the primary assertion regarding the current status aligns with the expected fact.", "cost": 0.0}
+{"id": "qb-q19", "verdict": "abstained", "reason": "The answer explicitly states 'Not in memory,' indicating the model does not know the fact rather than providing an incorrect or stale value.", "cost": 0.0}
+{"id": "qb-q47", "verdict": "abstained", "reason": "The answer explicitly states 'Not in memory,' indicating that the model does not know the information rather than providing an incorrect or outdated value.", "cost": 0.0}
+{"id": "qb-q37", "verdict": "correct", "reason": "The answer provides the exact expected value 'support@quillmere.example'.", "cost": 0.0}
+{"id": "qb-q55", "verdict": "correct", "reason": "The answer explicitly states that Quillmere's head office is in Alder, which matches the expected value exactly.", "cost": 0.0}
+{"id": "qb-q46", "verdict": "correct", "reason": "The answer explicitly states that the Glide 500 plan has no data cap, which matches the expected value exactly.", "cost": 0.0}
+{"id": "qb-q57", "verdict": "correct", "reason": "The answer explicitly states 'five add-on extenders', which matches the expected value of '5 extenders' in substance, despite the slight variation in terminology ('add-on' vs implied 'mesh' extenders). The date context is also consistent.", "cost": 0.0}
+{"id": "qb-q41", "verdict": "correct", "reason": "The answer explicitly states '4.3', which matches the expected value provided in the prompt.", "cost": 0.0}
+{"id": "qb-q18", "verdict": "correct", "reason": "The answer explicitly states '$8', which matches the expected value for the date 2026-03-20.", "cost": 0.0}
+{"id": "qb-q31", "verdict": "correct", "reason": "The answer provides the exact expected value ('Tuesday 1 to 4 am') for the specified date (2026-06-30).", "cost": 0.0}
+{"id": "qb-q52", "verdict": "correct", "reason": "The answer explicitly states '$10 per remaining month', which matches the expected value provided in the prompt.", "cost": 0.0}
+{"id": "qb-q02", "verdict": "correct", "reason": "The answer explicitly states '$5', which matches the expected value for the date 2026-01-08.", "cost": 0.0}
+{"id": "qb-q56", "verdict": "correct", "reason": "The answer explicitly states 'Bills issue on the 1st of each month', which matches the expected value exactly.", "cost": 0.0}
+{"id": "qb-q49", "verdict": "correct", "reason": "The answer explicitly states '21 days', which matches the expected value provided in the prompt.", "cost": 0.0}
+{"id": "qb-q15", "verdict": "abstained", "reason": "The answer explicitly states 'Not in memory,' indicating the model does not know the information rather than providing an incorrect or outdated specific value.", "cost": 0.0}
+{"id": "qb-q08", "verdict": "correct", "reason": "The answer explicitly states 'Version one', which matches the expected value 'v1' provided for the date 2026-02-08.", "cost": 0.0}
+{"id": "qb-q48", "verdict": "correct", "reason": "The answer explicitly states '$50', which matches the expected value provided for the date 2026-10-18.", "cost": 0.0}
+{"id": "qb-q43", "verdict": "wrong", "reason": "The answer provides a specific value (200 Mbps) that contradicts the expected value (1,000 Mbps). Since the expected value is the only known fact provided, the answer is incorrect.", "cost": 0.0}
+{"id": "qb-q36", "verdict": "correct", "reason": "The answer explicitly states 'QX-1', which matches the expected value provided in the prompt.", "cost": 0.0}
+{"id": "qb-q44", "verdict": "stale", "reason": "The answer provides '$50', which corresponds to one of the 'Other values at other times' rather than the expected value of '$100'.", "cost": 0.0}
+{"id": "qb-q16", "verdict": "correct", "reason": "The answer provides the exact URL 'status.quillmere.example' which matches the expected value for the date 2026-03-10.", "cost": 0.0}
+{"id": "qb-q53", "verdict": "stale", "reason": "The answer provides the value '$2/mo', which corresponds to the 'Other values at other times'. However, the 'Expected' value for the fact as of 2026-11-08 is 'Ended', indicating the credit is no longer active. Therefore, the answer is factually incorrect for the specified date.", "cost": 0.0}
+{"id": "qb-q27", "verdict": "correct", "reason": "The answer explicitly states '$5/mo', which matches the expected value provided for the date 2026-06-18.", "cost": 0.0}
+{"id": "qb-q28", "verdict": "correct", "reason": "The answer explicitly states 'eight in the morning to eight at night', which matches the expected value of '8 am to 8 pm' in substance.", "cost": 0.0}
+{"id": "qb-q06", "verdict": "correct", "reason": "The answer provides the exact expected value (3 months at 25% off) for the specified date, ignoring the stale value from other times.", "cost": 0.0}
+{"id": "qb-q03", "verdict": "correct", "reason": "The answer explicitly states '90 days', which matches the expected value provided for the date 2026-01-11.", "cost": 0.0}
+{"id": "qb-q14", "verdict": "wrong", "reason": "The answer states that version one (v1) is in force, but the expected value is v2. Since v1 is listed as one of the 'other values at other times' and not the expected current value, the answer is incorrect.", "cost": 0.0}
+{"id": "qb-q33", "verdict": "correct", "reason": "The answer explicitly states '30 days', which matches the expected value provided in the prompt.", "cost": 0.0}
+{"id": "qb-q54", "verdict": "correct", "reason": "The answer explicitly states '4.3', which matches the expected value provided in the prompt.", "cost": 0.0}
+{"id": "qb-q38", "verdict": "correct", "reason": "The answer explicitly states '$49 for everyone', which matches the expected value exactly.", "cost": 0.0}
+{"id": "qb-q24", "verdict": "correct", "reason": "The answer explicitly states 'There is no data cap', which matches the expected value 'No cap' for the specified date.", "cost": 0.0}
+{"id": "qb-q07", "verdict": "correct", "reason": "The answer explicitly confirms that customers can sign up for the Lite 25 plan and correctly states the monthly price of $25, which matches the expected value.", "cost": 0.0}
+{"id": "qb-q35", "verdict": "correct", "reason": "The answer explicitly states '$15 per 50 GB', which matches the expected value for the date 2026-07-18.", "cost": 0.0}
+{"id": "qb-q05", "verdict": "correct", "reason": "The answer explicitly states '$99', which matches the expected value for the specified date.", "cost": 0.0}
+{"id": "qb-q04", "verdict": "correct", "reason": "The answer provides the exact expected value ($39/mo) for the specified date (2026-01-13).", "cost": 0.0}
+{"id": "qb-q42", "verdict": "correct", "reason": "The answer provides the exact expected value of $44 for the specified date.", "cost": 0.0}
+{"id": "qb-q26", "verdict": "correct", "reason": "The answer explicitly states '$5/mo', which matches the expected value provided for the date 2026-05-31.", "cost": 0.0}
+{"id": "qb-q10", "verdict": "correct", "reason": "The answer explicitly states '$79/mo', which matches the expected value provided in the prompt.", "cost": 0.0}
+{"id": "qb-q21", "verdict": "correct", "reason": "The answer explicitly states '$59/mo', which matches the expected value for the date 2026-04-12.", "cost": 0.0}

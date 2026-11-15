@@ -1,0 +1,101 @@
+{
+ "cutoffs": {
+  "cutoff": 0.75,
+  "unsure_low": 0.75,
+  "critical_at": 0.9
+ },
+ "rubric_version": 1,
+ "jev_model": "jev-1.14.0",
+ "variant": "hybrid",
+ "k": 50,
+ "budget": 6000,
+ "rule": "1. most answerable questions with at least one gold passage kept (recall first)\n  2. then the highest mean share of kept tokens that are gold\n  3. then the fewest lookalike or decoy passages kept\n  4. then the fewest median kept tokens",
+ "rotations": [
+  {
+   "test": "secret-adversary",
+   "cutoffs": {
+    "cutoff": 0.75,
+    "unsure_low": 0.75,
+    "critical_at": 0.9
+   },
+   "tune": {
+    "gold_caught": 88,
+    "answerable": 90,
+    "needles_caught": 40,
+    "needles": 40,
+    "gold_share": 0.6812733168304592,
+    "decoys_kept": 5,
+    "median_tokens": 448.0
+   },
+   "test_result": {
+    "gold_caught": 44,
+    "answerable": 44,
+    "needles_caught": 20,
+    "needles": 20,
+    "gold_share": 0.6726756009908539,
+    "decoys_kept": 4,
+    "median_tokens": 629.5
+   }
+  },
+  {
+   "test": "moonstone",
+   "cutoffs": {
+    "cutoff": 1.0,
+    "unsure_low": 1.01,
+    "critical_at": 0.7
+   },
+   "tune": {
+    "gold_caught": 88,
+    "answerable": 88,
+    "needles_caught": 40,
+    "needles": 40,
+    "gold_share": 0.757800037012211,
+    "decoys_kept": 6,
+    "median_tokens": 356.5
+   },
+   "test_result": {
+    "gold_caught": 42,
+    "answerable": 46,
+    "needles_caught": 20,
+    "needles": 20,
+    "gold_share": 0.6954651958011552,
+    "decoys_kept": 1,
+    "median_tokens": 422.0
+   }
+  },
+  {
+   "test": "way-we-live-now",
+   "cutoffs": {
+    "cutoff": 0.75,
+    "unsure_low": 0.75,
+    "critical_at": 0.9
+   },
+   "tune": {
+    "gold_caught": 88,
+    "answerable": 90,
+    "needles_caught": 40,
+    "needles": 40,
+    "gold_share": 0.6600350691713075,
+    "decoys_kept": 5,
+    "median_tokens": 514.5
+   },
+   "test_result": {
+    "gold_caught": 44,
+    "answerable": 44,
+    "needles_caught": 20,
+    "needles": 20,
+    "gold_share": 0.716117471202755,
+    "decoys_kept": 4,
+    "median_tokens": 371.0
+   }
+  }
+ ],
+ "pooled_test": {
+  "gold_caught": 130,
+  "answerable": 134,
+  "needles_caught": 60,
+  "needles": 60,
+  "decoys_kept": 9,
+  "gold_share": 0.6947633894281487
+ }
+}

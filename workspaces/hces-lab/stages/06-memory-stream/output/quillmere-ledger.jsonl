@@ -1,0 +1,97 @@
+{"key": "hq", "value": "Head office in Alder", "valid_from": "2026-01-01", "valid_to": null, "kind": "stable"}
+{"key": "founded", "value": "2009", "valid_from": "2026-01-01", "valid_to": null, "kind": "stable"}
+{"key": "glide_cap", "value": "Glide 500 has no data cap", "valid_from": "2026-01-01", "valid_to": null, "kind": "stable"}
+{"key": "torrent_download", "value": "Torrent 1G downloads at 1,000 Mbps", "valid_from": "2026-01-01", "valid_to": null, "kind": "stable"}
+{"key": "router_brand", "value": "Customer router is the Q-Box", "valid_from": "2026-01-01", "valid_to": null, "kind": "stable"}
+{"key": "billing_day", "value": "Bills issue on the 1st of each month", "valid_from": "2026-01-01", "valid_to": null, "kind": "stable"}
+{"key": "email_support", "value": "support@quillmere.example", "valid_from": "2026-01-01", "valid_to": null, "kind": "stable"}
+{"key": "contract_none", "value": "Month-to-month is available on every plan", "valid_from": "2026-01-01", "valid_to": null, "kind": "stable"}
+{"key": "spark_price", "value": "$39/mo", "valid_from": "2026-01-01", "valid_to": "2026-03-01", "kind": "changing"}
+{"key": "spark_price", "value": "$42", "valid_from": "2026-03-01", "valid_to": "2026-09-01", "kind": "changing"}
+{"key": "spark_price", "value": "$44", "valid_from": "2026-09-01", "valid_to": null, "kind": "changing"}
+{"key": "glide_price", "value": "$59/mo", "valid_from": "2026-01-01", "valid_to": "2026-06-01", "kind": "changing"}
+{"key": "glide_price", "value": "$55", "valid_from": "2026-06-01", "valid_to": null, "kind": "changing"}
+{"key": "torrent_price", "value": "$79/mo", "valid_from": "2026-01-01", "valid_to": "2026-03-01", "kind": "changing"}
+{"key": "torrent_price", "value": "$85", "valid_from": "2026-03-01", "valid_to": null, "kind": "changing"}
+{"key": "torrent_upload", "value": "50 Mbps", "valid_from": "2026-01-01", "valid_to": "2026-07-15", "kind": "changing"}
+{"key": "torrent_upload", "value": "200 Mbps", "valid_from": "2026-07-15", "valid_to": null, "kind": "changing"}
+{"key": "spark_cap", "value": "1.2 TB", "valid_from": "2026-01-01", "valid_to": "2026-05-01", "kind": "changing"}
+{"key": "spark_cap", "value": "No cap", "valid_from": "2026-05-01", "valid_to": null, "kind": "changing"}
+{"key": "lite_plan", "value": "Lite 25 at $25/mo, open to new signups", "valid_from": "2026-01-01", "valid_to": "2026-08-01", "kind": "changing"}
+{"key": "lite_plan", "value": "Closed to new signups", "valid_from": "2026-08-01", "valid_to": "2026-11-01", "kind": "changing"}
+{"key": "lite_plan", "value": "Existing Lite moved to Spark", "valid_from": "2026-11-01", "valid_to": null, "kind": "changing"}
+{"key": "overage_fee", "value": "$10 per 50 GB", "valid_from": "2026-01-01", "valid_to": "2026-04-01", "kind": "changing"}
+{"key": "overage_fee", "value": "$15 per 50 GB", "valid_from": "2026-04-01", "valid_to": null, "kind": "changing"}
+{"key": "modem_fee", "value": "$10/mo", "valid_from": "2026-01-01", "valid_to": "2026-03-01", "kind": "changing"}
+{"key": "modem_fee", "value": "$12/mo", "valid_from": "2026-03-01", "valid_to": "2026-10-01", "kind": "changing"}
+{"key": "modem_fee", "value": "$0 for Torrent, $12 others", "valid_from": "2026-10-01", "valid_to": null, "kind": "changing"}
+{"key": "install_fee", "value": "$99", "valid_from": "2026-01-01", "valid_to": "2026-02-15", "kind": "changing"}
+{"key": "install_fee", "value": "Free with 12-month contract", "valid_from": "2026-02-15", "valid_to": "2026-08-01", "kind": "changing"}
+{"key": "install_fee", "value": "$49 for everyone", "valid_from": "2026-08-01", "valid_to": null, "kind": "changing"}
+{"key": "etf", "value": "$150 flat", "valid_from": "2026-01-01", "valid_to": "2026-06-01", "kind": "changing"}
+{"key": "etf", "value": "$10 per remaining month", "valid_from": "2026-06-01", "valid_to": null, "kind": "changing"}
+{"key": "senior_discount", "value": "$5/mo", "valid_from": "2026-01-01", "valid_to": "2026-07-01", "kind": "changing"}
+{"key": "senior_discount", "value": "$8/mo", "valid_from": "2026-07-01", "valid_to": null, "kind": "changing"}
+{"key": "paperless_credit", "value": "$2/mo", "valid_from": "2026-01-01", "valid_to": "2026-04-15", "kind": "changing"}
+{"key": "paperless_credit", "value": "Ended", "valid_from": "2026-04-15", "valid_to": null, "kind": "changing"}
+{"key": "refund_window", "value": "14 days", "valid_from": "2026-01-01", "valid_to": "2026-04-01", "kind": "changing"}
+{"key": "refund_window", "value": "30 days", "valid_from": "2026-04-01", "valid_to": "2026-10-15", "kind": "changing"}
+{"key": "refund_window", "value": "21 days", "valid_from": "2026-10-15", "valid_to": null, "kind": "changing"}
+{"key": "outage_credit", "value": "1 day per full 24 h down", "valid_from": "2026-01-01", "valid_to": "2026-06-15", "kind": "changing"}
+{"key": "outage_credit", "value": "Hourly, after 4 h down", "valid_from": "2026-06-15", "valid_to": null, "kind": "changing"}
+{"key": "late_fee", "value": "$5", "valid_from": "2026-01-01", "valid_to": "2026-03-01", "kind": "changing"}
+{"key": "late_fee", "value": "$8", "valid_from": "2026-03-01", "valid_to": null, "kind": "changing"}
+{"key": "grace_period", "value": "30 days before suspension", "valid_from": "2026-01-01", "valid_to": "2026-09-01", "kind": "changing"}
+{"key": "grace_period", "value": "21 days", "valid_from": "2026-09-01", "valid_to": null, "kind": "changing"}
+{"key": "reconnect_fee", "value": "$25", "valid_from": "2026-01-01", "valid_to": "2026-02-01", "kind": "changing"}
+{"key": "reconnect_fee", "value": "Waived", "valid_from": "2026-02-01", "valid_to": null, "kind": "changing"}
+{"key": "price_lock", "value": "12 months", "valid_from": "2026-01-01", "valid_to": "2026-05-15", "kind": "changing"}
+{"key": "price_lock", "value": "24 months for new signups", "valid_from": "2026-05-15", "valid_to": null, "kind": "changing"}
+{"key": "support_hours", "value": "8 am to 8 pm", "valid_from": "2026-01-01", "valid_to": "2026-07-01", "kind": "changing"}
+{"key": "support_hours", "value": "24/7", "valid_from": "2026-07-01", "valid_to": null, "kind": "changing"}
+{"key": "support_phone", "value": "1-800-555-0142", "valid_from": "2026-01-01", "valid_to": "2026-04-20", "kind": "changing"}
+{"key": "support_phone", "value": "1-888-555-0177", "valid_from": "2026-04-20", "valid_to": null, "kind": "changing"}
+{"key": "tier2_sla", "value": "Callback within 48 h", "valid_from": "2026-01-01", "valid_to": "2026-08-15", "kind": "changing"}
+{"key": "tier2_sla", "value": "Within 24 h", "valid_from": "2026-08-15", "valid_to": null, "kind": "changing"}
+{"key": "tech_visit_fee", "value": "$75 (customer-caused fault)", "valid_from": "2026-01-01", "valid_to": "2026-03-01", "kind": "changing"}
+{"key": "tech_visit_fee", "value": "$95", "valid_from": "2026-03-01", "valid_to": null, "kind": "changing"}
+{"key": "move_fee", "value": "$50", "valid_from": "2026-01-01", "valid_to": "2026-11-01", "kind": "changing"}
+{"key": "move_fee", "value": "Free", "valid_from": "2026-11-01", "valid_to": null, "kind": "changing"}
+{"key": "payment_methods", "value": "Card, bank debit", "valid_from": "2026-01-01", "valid_to": "2026-06-01", "kind": "changing"}
+{"key": "payment_methods", "value": "Adds PayPal", "valid_from": "2026-06-01", "valid_to": null, "kind": "changing"}
+{"key": "autopay_discount", "value": "$3/mo", "valid_from": "2026-01-01", "valid_to": "2026-02-01", "kind": "changing"}
+{"key": "autopay_discount", "value": "$5/mo", "valid_from": "2026-02-01", "valid_to": null, "kind": "changing"}
+{"key": "redlight_fix", "value": "Power-cycle the Q-Box", "valid_from": "2026-01-01", "valid_to": "2026-03-10", "kind": "changing"}
+{"key": "redlight_fix", "value": "Firmware 4.2 update", "valid_from": "2026-03-10", "valid_to": "2026-06-05", "kind": "changing"}
+{"key": "redlight_fix", "value": "Replace unit if batch QB-2", "valid_from": "2026-06-05", "valid_to": null, "kind": "changing"}
+{"key": "firmware", "value": "4.1", "valid_from": "2026-01-01", "valid_to": "2026-03-10", "kind": "changing"}
+{"key": "firmware", "value": "4.2", "valid_from": "2026-03-10", "valid_to": "2026-08-20", "kind": "changing"}
+{"key": "firmware", "value": "4.3", "valid_from": "2026-08-20", "valid_to": null, "kind": "changing"}
+{"key": "status_page", "value": "status.quillmere.example", "valid_from": "2026-01-01", "valid_to": "2026-05-05", "kind": "changing"}
+{"key": "status_page", "value": "quillmere.example/status", "valid_from": "2026-05-05", "valid_to": null, "kind": "changing"}
+{"key": "fiber_towns", "value": "Alder, Brook", "valid_from": "2026-01-01", "valid_to": "2026-04-01", "kind": "changing"}
+{"key": "fiber_towns", "value": "Adds Calder", "valid_from": "2026-04-01", "valid_to": "2026-10-01", "kind": "changing"}
+{"key": "fiber_towns", "value": "Adds Dunmore", "valid_from": "2026-10-01", "valid_to": null, "kind": "changing"}
+{"key": "maintenance_window", "value": "Tuesday 1 to 4 am", "valid_from": "2026-01-01", "valid_to": "2026-07-01", "kind": "changing"}
+{"key": "maintenance_window", "value": "Sunday 2 to 5 am", "valid_from": "2026-07-01", "valid_to": null, "kind": "changing"}
+{"key": "extender_model", "value": "QX-1", "valid_from": "2026-01-01", "valid_to": "2026-09-01", "kind": "changing"}
+{"key": "extender_model", "value": "QX-2", "valid_from": "2026-09-01", "valid_to": null, "kind": "changing"}
+{"key": "mesh_max", "value": "3 extenders", "valid_from": "2026-01-01", "valid_to": "2026-09-01", "kind": "changing"}
+{"key": "mesh_max", "value": "5 extenders", "valid_from": "2026-09-01", "valid_to": null, "kind": "changing"}
+{"key": "agent_refund_limit", "value": "Up to $50 without approval", "valid_from": "2026-01-01", "valid_to": "2026-05-01", "kind": "changing"}
+{"key": "agent_refund_limit", "value": "$100", "valid_from": "2026-05-01", "valid_to": "2026-10-15", "kind": "changing"}
+{"key": "agent_refund_limit", "value": "$75", "valid_from": "2026-10-15", "valid_to": null, "kind": "changing"}
+{"key": "retention_offer", "value": "3 months at 25% off", "valid_from": "2026-01-01", "valid_to": "2026-08-01", "kind": "changing"}
+{"key": "retention_offer", "value": "2 months at 30% off", "valid_from": "2026-08-01", "valid_to": null, "kind": "changing"}
+{"key": "recording_consent", "value": "Script v1", "valid_from": "2026-01-01", "valid_to": "2026-06-01", "kind": "changing"}
+{"key": "recording_consent", "value": "Script v2", "valid_from": "2026-06-01", "valid_to": null, "kind": "changing"}
+{"key": "recording_retention", "value": "90 days", "valid_from": "2026-01-01", "valid_to": "2026-09-01", "kind": "changing"}
+{"key": "recording_retention", "value": "60 days", "valid_from": "2026-09-01", "valid_to": null, "kind": "changing"}
+{"key": "id_check", "value": "Last 4 of SSN", "valid_from": "2026-01-01", "valid_to": "2026-03-15", "kind": "changing"}
+{"key": "id_check", "value": "Account PIN", "valid_from": "2026-03-15", "valid_to": null, "kind": "changing"}
+{"key": "missed_appt_credit", "value": "$20", "valid_from": "2026-01-01", "valid_to": "2026-07-01", "kind": "changing"}
+{"key": "missed_appt_credit", "value": "$30", "valid_from": "2026-07-01", "valid_to": null, "kind": "changing"}
+{"key": "big_credit_approver", "value": "Supervisor approves outage credits over $100", "valid_from": "2026-01-01", "valid_to": "2026-06-15", "kind": "changing"}
+{"key": "big_credit_approver", "value": "Billing team lead", "valid_from": "2026-06-15", "valid_to": null, "kind": "changing"}
+{"key": "contract_terms", "value": "12 or 24 months", "valid_from": "2026-01-01", "valid_to": "2026-12-01", "kind": "changing"}
+{"key": "contract_terms", "value": "12 months only", "valid_from": "2026-12-01", "valid_to": null, "kind": "changing"}

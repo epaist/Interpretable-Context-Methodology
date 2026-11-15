@@ -1,0 +1,247 @@
+{
+ "volume": "moonstone",
+ "runs": 372,
+ "wall_s": 6.1,
+ "budget": 6000,
+ "by_variant": [
+  {
+   "variant": "hybrid/chaptered",
+   "k": 20,
+   "questions": 31,
+   "retrieved_any_gold": 0.96,
+   "kept_any_gold": 0.96,
+   "needles_retrieved": 1.0,
+   "needles_kept": 1.0,
+   "real_retrieved": 0.933,
+   "real_kept": 0.933,
+   "misses": [
+    "moonstone/q05"
+   ],
+   "decoys_kept": 2,
+   "max_tokens_used": 5996,
+   "median_access_ms": 10.2,
+   "peak_rss_mb": 211.3
+  },
+  {
+   "variant": "hybrid/chaptered",
+   "k": 50,
+   "questions": 31,
+   "retrieved_any_gold": 0.96,
+   "kept_any_gold": 0.88,
+   "needles_retrieved": 1.0,
+   "needles_kept": 0.8,
+   "real_retrieved": 0.933,
+   "real_kept": 0.933,
+   "misses": [
+    "moonstone/q05"
+   ],
+   "decoys_kept": 0,
+   "max_tokens_used": 6000,
+   "median_access_ms": 10.2,
+   "peak_rss_mb": 211.3
+  },
+  {
+   "variant": "hybrid/chaptered",
+   "k": 100,
+   "questions": 31,
+   "retrieved_any_gold": 1.0,
+   "kept_any_gold": 0.8,
+   "needles_retrieved": 1.0,
+   "needles_kept": 0.6,
+   "real_retrieved": 1.0,
+   "real_kept": 0.933,
+   "misses": [],
+   "decoys_kept": 1,
+   "max_tokens_used": 5998,
+   "median_access_ms": 10.6,
+   "peak_rss_mb": 211.3
+  },
+  {
+   "variant": "hybrid/plain",
+   "k": 20,
+   "questions": 31,
+   "retrieved_any_gold": 0.96,
+   "kept_any_gold": 0.96,
+   "needles_retrieved": 1.0,
+   "needles_kept": 1.0,
+   "real_retrieved": 0.933,
+   "real_kept": 0.933,
+   "misses": [
+    "moonstone/q05"
+   ],
+   "decoys_kept": 2,
+   "max_tokens_used": 6000,
+   "median_access_ms": 10.9,
+   "peak_rss_mb": 213.6
+  },
+  {
+   "variant": "hybrid/plain",
+   "k": 50,
+   "questions": 31,
+   "retrieved_any_gold": 0.96,
+   "kept_any_gold": 0.84,
+   "needles_retrieved": 1.0,
+   "needles_kept": 0.8,
+   "real_retrieved": 0.933,
+   "real_kept": 0.867,
+   "misses": [
+    "moonstone/q05"
+   ],
+   "decoys_kept": 0,
+   "max_tokens_used": 5994,
+   "median_access_ms": 11.5,
+   "peak_rss_mb": 213.6
+  },
+  {
+   "variant": "hybrid/plain",
+   "k": 100,
+   "questions": 31,
+   "retrieved_any_gold": 1.0,
+   "kept_any_gold": 0.84,
+   "needles_retrieved": 1.0,
+   "needles_kept": 0.7,
+   "real_retrieved": 1.0,
+   "real_kept": 0.933,
+   "misses": [],
+   "decoys_kept": 0,
+   "max_tokens_used": 6000,
+   "median_access_ms": 11.2,
+   "peak_rss_mb": 213.6
+  },
+  {
+   "variant": "vector/chaptered",
+   "k": 20,
+   "questions": 31,
+   "retrieved_any_gold": 0.68,
+   "kept_any_gold": 0.68,
+   "needles_retrieved": 0.5,
+   "needles_kept": 0.5,
+   "real_retrieved": 0.8,
+   "real_kept": 0.8,
+   "misses": [
+    "moonstone/n01",
+    "moonstone/n05",
+    "moonstone/n06",
+    "moonstone/n07",
+    "moonstone/n09",
+    "moonstone/q05",
+    "moonstone/q10",
+    "moonstone/q11"
+   ],
+   "decoys_kept": 0,
+   "max_tokens_used": 5998,
+   "median_access_ms": 7.9,
+   "peak_rss_mb": 211.3
+  },
+  {
+   "variant": "vector/chaptered",
+   "k": 50,
+   "questions": 31,
+   "retrieved_any_gold": 0.76,
+   "kept_any_gold": 0.68,
+   "needles_retrieved": 0.6,
+   "needles_kept": 0.5,
+   "real_retrieved": 0.867,
+   "real_kept": 0.8,
+   "misses": [
+    "moonstone/n01",
+    "moonstone/n05",
+    "moonstone/n07",
+    "moonstone/n09",
+    "moonstone/q05",
+    "moonstone/q10"
+   ],
+   "decoys_kept": 0,
+   "max_tokens_used": 5998,
+   "median_access_ms": 7.8,
+   "peak_rss_mb": 211.3
+  },
+  {
+   "variant": "vector/chaptered",
+   "k": 100,
+   "questions": 31,
+   "retrieved_any_gold": 0.88,
+   "kept_any_gold": 0.68,
+   "needles_retrieved": 0.7,
+   "needles_kept": 0.5,
+   "real_retrieved": 1.0,
+   "real_kept": 0.8,
+   "misses": [
+    "moonstone/n01",
+    "moonstone/n05",
+    "moonstone/n07"
+   ],
+   "decoys_kept": 0,
+   "max_tokens_used": 5998,
+   "median_access_ms": 8.1,
+   "peak_rss_mb": 211.3
+  },
+  {
+   "variant": "vector/plain",
+   "k": 20,
+   "questions": 31,
+   "retrieved_any_gold": 0.68,
+   "kept_any_gold": 0.68,
+   "needles_retrieved": 0.5,
+   "needles_kept": 0.5,
+   "real_retrieved": 0.8,
+   "real_kept": 0.8,
+   "misses": [
+    "moonstone/n01",
+    "moonstone/n05",
+    "moonstone/n06",
+    "moonstone/n07",
+    "moonstone/n09",
+    "moonstone/q01",
+    "moonstone/q05",
+    "moonstone/q11"
+   ],
+   "decoys_kept": 0,
+   "max_tokens_used": 5997,
+   "median_access_ms": 8.3,
+   "peak_rss_mb": 213.6
+  },
+  {
+   "variant": "vector/plain",
+   "k": 50,
+   "questions": 31,
+   "retrieved_any_gold": 0.8,
+   "kept_any_gold": 0.68,
+   "needles_retrieved": 0.6,
+   "needles_kept": 0.5,
+   "real_retrieved": 0.933,
+   "real_kept": 0.8,
+   "misses": [
+    "moonstone/n01",
+    "moonstone/n05",
+    "moonstone/n07",
+    "moonstone/n09",
+    "moonstone/q05"
+   ],
+   "decoys_kept": 0,
+   "max_tokens_used": 5997,
+   "median_access_ms": 7.9,
+   "peak_rss_mb": 213.6
+  },
+  {
+   "variant": "vector/plain",
+   "k": 100,
+   "questions": 31,
+   "retrieved_any_gold": 0.88,
+   "kept_any_gold": 0.68,
+   "needles_retrieved": 0.7,
+   "needles_kept": 0.5,
+   "real_retrieved": 1.0,
+   "real_kept": 0.8,
+   "misses": [
+    "moonstone/n01",
+    "moonstone/n05",
+    "moonstone/n07"
+   ],
+   "decoys_kept": 0,
+   "max_tokens_used": 5997,
+   "median_access_ms": 8.7,
+   "peak_rss_mb": 213.6
+  }
+ ]
+}

@@ -1,0 +1,100 @@
+{"date": "2026-01-06", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-001", "phase": "c"}
+{"date": "2026-01-06", "key": "big_credit_approver", "value": "Supervisor approves outage credits over $100", "style": "normal", "kind": "newsletter", "id": "qc-002", "phase": "c"}
+{"date": "2026-01-16", "key": "recording_consent", "value": "Script v1", "style": "rephrase", "kind": "newsletter", "id": "qc-003", "phase": "c"}
+{"date": "2026-01-21", "key": "autopay_discount", "value": "$5/mo", "style": "plan", "effective": "2026-02-01", "kind": "meeting notes", "id": "qc-004", "phase": "c"}
+{"date": "2026-01-23", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-005", "phase": "c"}
+{"date": "2026-01-29", "key": "reconnect_fee", "value": "Waived", "style": "announce", "effective": "2026-02-01", "id": "ann-001", "kind": "announcement", "phase": "c"}
+{"date": "2026-01-30", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-006", "phase": "c"}
+{"date": "2026-02-06", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-007", "phase": "c"}
+{"date": "2026-02-06", "key": "spark_cap", "value": "1.2 TB", "style": "normal", "kind": "newsletter", "id": "qc-008", "phase": "c"}
+{"date": "2026-02-07", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-009", "phase": "c"}
+{"date": "2026-02-11", "key": "modem_fee", "value": "$12/mo", "style": "plan", "effective": "2026-03-01", "kind": "meeting notes", "id": "qc-010", "phase": "c"}
+{"date": "2026-02-16", "key": "refund_window", "value": "14 days", "style": "normal", "kind": "newsletter", "id": "qc-011", "phase": "c"}
+{"date": "2026-02-21", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-012", "phase": "c"}
+{"date": "2026-02-22", "key": "tech_visit_fee", "value": "$95", "style": "announce", "effective": "2026-03-01", "id": "ann-002", "kind": "announcement", "phase": "c"}
+{"date": "2026-02-24", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-013", "phase": "c"}
+{"date": "2026-03-02", "key": "fiber_towns", "value": "Adds Calder", "style": "early_announce", "effective": "2026-03-15", "id": "ann-003", "kind": "announcement", "phase": "c"}
+{"date": "2026-03-06", "key": "fiber_towns", "value": "Alder, Brook", "style": "rephrase", "kind": "newsletter", "id": "qc-014", "phase": "c"}
+{"date": "2026-03-12", "key": "fiber_towns", "value": "Adds Calder", "style": "delay", "effective": "2026-04-01", "was": "2026-03-15", "id": "ann-004", "kind": "announcement", "phase": "c"}
+{"date": "2026-03-15", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-015", "phase": "c"}
+{"date": "2026-03-16", "key": "router_brand", "value": "Customer router is the Q-Box", "style": "rephrase", "kind": "newsletter", "id": "qc-016", "phase": "c"}
+{"date": "2026-03-20", "key": "overage_fee", "value": "$15 per 50 GB", "style": "plan", "effective": "2026-04-01", "kind": "meeting notes", "id": "qc-017", "phase": "c"}
+{"date": "2026-03-20", "key": "refund_window", "value": "30 days", "style": "plan", "effective": "2026-04-01", "kind": "meeting notes", "id": "qc-018", "phase": "c"}
+{"date": "2026-03-27", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-019", "phase": "c"}
+{"date": "2026-03-30", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-020", "phase": "c"}
+{"date": "2026-03-31", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-021", "phase": "c"}
+{"date": "2026-04-05", "key": "paperless_credit", "value": "Ended", "style": "announce", "effective": "2026-04-15", "id": "ann-005", "kind": "announcement", "phase": "c"}
+{"date": "2026-04-06", "key": "spark_cap", "value": "1.2 TB", "style": "normal", "kind": "newsletter", "id": "qc-022", "phase": "c"}
+{"date": "2026-04-10", "key": "support_phone", "value": "1-888-555-0177", "style": "announce", "effective": "2026-04-20", "id": "ann-006", "kind": "announcement", "phase": "c"}
+{"date": "2026-04-16", "key": "etf", "value": "$150 flat", "style": "normal", "kind": "newsletter", "id": "qc-023", "phase": "c"}
+{"date": "2026-04-20", "key": "status_page", "value": "quillmere.example/status", "style": "plan", "effective": "2026-05-05", "kind": "meeting notes", "id": "qc-024", "phase": "c"}
+{"date": "2026-04-22", "key": "spark_cap", "value": "No cap", "style": "plan", "effective": "2026-05-01", "kind": "meeting notes", "id": "qc-025", "phase": "c"}
+{"date": "2026-04-26", "key": "agent_refund_limit", "value": "$100", "style": "plan", "effective": "2026-05-01", "kind": "meeting notes", "id": "qc-026", "phase": "c"}
+{"date": "2026-05-06", "key": "payment_methods", "value": "Card, bank debit", "style": "normal", "kind": "newsletter", "id": "qc-027", "phase": "c"}
+{"date": "2026-05-08", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-028", "phase": "c"}
+{"date": "2026-05-16", "key": "etf", "value": "$10 per remaining month", "style": "plan", "effective": "2026-06-01", "kind": "meeting notes", "id": "qc-029", "phase": "c"}
+{"date": "2026-05-16", "key": "glide_cap", "value": "Glide 500 has no data cap", "style": "rephrase", "kind": "newsletter", "id": "qc-030", "phase": "c"}
+{"date": "2026-05-17", "key": "redlight_fix", "value": "Replace unit if batch QB-2", "style": "plan", "effective": "2026-06-05", "kind": "meeting notes", "id": "qc-031", "phase": "c"}
+{"date": "2026-05-20", "key": "recording_consent", "value": "Script v2", "style": "plan", "effective": "2026-06-01", "kind": "meeting notes", "id": "qc-032", "phase": "c"}
+{"date": "2026-05-24", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-033", "phase": "c"}
+{"date": "2026-05-26", "key": "glide_price", "value": "$55", "style": "plan", "effective": "2026-06-01", "kind": "meeting notes", "id": "qc-034", "phase": "c"}
+{"date": "2026-05-27", "key": "outage_credit", "value": "Hourly, after 4 h down", "style": "plan", "effective": "2026-06-15", "kind": "meeting notes", "id": "qc-035", "phase": "c"}
+{"date": "2026-05-28", "key": "big_credit_approver", "value": "Billing team lead", "style": "plan", "effective": "2026-06-15", "kind": "meeting notes", "id": "qc-036", "phase": "c"}
+{"date": "2026-05-29", "key": "payment_methods", "value": "Adds PayPal", "style": "announce", "effective": "2026-06-01", "id": "ann-007", "kind": "announcement", "phase": "c"}
+{"date": "2026-06-06", "key": "paperless_credit", "value": "Ended", "style": "rephrase", "kind": "newsletter", "id": "qc-037", "phase": "c"}
+{"date": "2026-06-16", "key": "payment_methods", "value": "Adds PayPal", "style": "normal", "kind": "newsletter", "id": "qc-038", "phase": "c"}
+{"date": "2026-06-22", "key": "senior_discount", "value": "$8/mo", "style": "announce", "effective": "2026-07-01", "id": "ann-008", "kind": "announcement", "phase": "c"}
+{"date": "2026-06-25", "key": "support_hours", "value": "24/7", "style": "announce", "effective": "2026-07-01", "id": "ann-009", "kind": "announcement", "phase": "c"}
+{"date": "2026-07-02", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-039", "phase": "c"}
+{"date": "2026-07-03", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-040", "phase": "c"}
+{"date": "2026-07-06", "key": "tech_visit_fee", "value": "$95", "style": "rephrase", "kind": "newsletter", "id": "qc-041", "phase": "c"}
+{"date": "2026-07-12", "key": "torrent_upload", "value": "200 Mbps", "style": "announce", "effective": "2026-07-15", "id": "ann-010", "kind": "announcement", "phase": "c"}
+{"date": "2026-07-16", "key": "fiber_towns", "value": "Adds Calder", "style": "normal", "kind": "newsletter", "id": "qc-042", "phase": "c"}
+{"date": "2026-07-18", "key": "install_fee", "value": "$49 for everyone", "style": "plan", "effective": "2026-08-01", "kind": "meeting notes", "id": "qc-043", "phase": "c"}
+{"date": "2026-07-22", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-044", "phase": "c"}
+{"date": "2026-07-23", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-045", "phase": "c"}
+{"date": "2026-07-25", "key": "lite_plan", "value": "Closed to new signups", "style": "plan", "effective": "2026-08-01", "kind": "meeting notes", "id": "qc-046", "phase": "c"}
+{"date": "2026-07-29", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-047", "phase": "c"}
+{"date": "2026-07-31", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-048", "phase": "c"}
+{"date": "2026-08-03", "key": "firmware", "value": "4.3", "style": "plan", "effective": "2026-08-20", "kind": "meeting notes", "id": "qc-049", "phase": "c"}
+{"date": "2026-08-05", "key": "tier2_sla", "value": "Within 24 h", "style": "announce", "effective": "2026-08-15", "id": "ann-011", "kind": "announcement", "phase": "c"}
+{"date": "2026-08-05", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-050", "phase": "c"}
+{"date": "2026-08-06", "key": "etf", "value": "$10 per remaining month", "style": "rephrase", "kind": "newsletter", "id": "qc-051", "phase": "c"}
+{"date": "2026-08-08", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-052", "phase": "c"}
+{"date": "2026-08-16", "key": "price_lock", "value": "24 months for new signups", "style": "rephrase", "kind": "newsletter", "id": "qc-053", "phase": "c"}
+{"date": "2026-08-17", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-054", "phase": "c"}
+{"date": "2026-08-18", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-055", "phase": "c"}
+{"date": "2026-08-22", "key": "recording_retention", "value": "60 days", "style": "plan", "effective": "2026-09-01", "kind": "meeting notes", "id": "qc-056", "phase": "c"}
+{"date": "2026-08-24", "key": "extender_model", "value": "QX-2", "style": "announce", "effective": "2026-09-01", "id": "ann-012", "kind": "announcement", "phase": "c"}
+{"date": "2026-08-28", "key": "mesh_max", "value": "5 extenders", "style": "announce", "effective": "2026-09-01", "id": "ann-013", "kind": "announcement", "phase": "c"}
+{"date": "2026-08-29", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-057", "phase": "c"}
+{"date": "2026-09-06", "key": "firmware", "value": "4.3", "style": "normal", "kind": "newsletter", "id": "qc-058", "phase": "c"}
+{"date": "2026-09-09", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-059", "phase": "c"}
+{"date": "2026-09-12", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-060", "phase": "c"}
+{"date": "2026-09-12", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-061", "phase": "c"}
+{"date": "2026-09-15", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-062", "phase": "c"}
+{"date": "2026-09-16", "key": "founded", "value": "2009", "style": "rephrase", "kind": "newsletter", "id": "qc-063", "phase": "c"}
+{"date": "2026-09-16", "key": "modem_fee", "value": "$0 for Torrent, $12 others", "style": "plan", "effective": "2026-10-01", "kind": "meeting notes", "id": "qc-064", "phase": "c"}
+{"date": "2026-09-17", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-065", "phase": "c"}
+{"date": "2026-09-21", "key": "fiber_towns", "value": "Adds Dunmore", "style": "announce", "effective": "2026-10-01", "id": "ann-014", "kind": "announcement", "phase": "c"}
+{"date": "2026-09-25", "key": "refund_window", "value": "21 days", "style": "plan", "effective": "2026-10-15", "kind": "meeting notes", "id": "qc-066", "phase": "c"}
+{"date": "2026-09-28", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-067", "phase": "c"}
+{"date": "2026-09-30", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-068", "phase": "c"}
+{"date": "2026-10-03", "key": "agent_refund_limit", "value": "$75", "style": "plan", "effective": "2026-10-15", "kind": "meeting notes", "id": "qc-069", "phase": "c"}
+{"date": "2026-10-06", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-070", "phase": "c"}
+{"date": "2026-10-06", "key": "missed_appt_credit", "value": "$30", "style": "rephrase", "kind": "newsletter", "id": "qc-071", "phase": "c"}
+{"date": "2026-10-07", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-072", "phase": "c"}
+{"date": "2026-10-08", "key": "spark_price", "value": "$46", "style": "floated", "effective": "2026-11-01", "kind": "meeting notes", "id": "qc-073", "phase": "c"}
+{"date": "2026-10-09", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-074", "phase": "c"}
+{"date": "2026-10-16", "key": "paperless_credit", "value": "Ended", "style": "normal", "kind": "newsletter", "id": "qc-075", "phase": "c"}
+{"date": "2026-10-18", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-076", "phase": "c"}
+{"date": "2026-10-27", "key": "move_fee", "value": "Free", "style": "announce", "effective": "2026-11-01", "id": "ann-015", "kind": "announcement", "phase": "c"}
+{"date": "2026-10-30", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-077", "phase": "c"}
+{"date": "2026-10-31", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-078", "phase": "c"}
+{"date": "2026-11-06", "key": "agent_refund_limit", "value": "$75", "style": "normal", "kind": "newsletter", "id": "qc-079", "phase": "c"}
+{"date": "2026-11-09", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-080", "phase": "c"}
+{"date": "2026-11-16", "key": "mesh_max", "value": "5 extenders", "style": "rephrase", "kind": "newsletter", "id": "qc-081", "phase": "c"}
+{"date": "2026-12-06", "key": "hq", "value": "Head office in Alder", "style": "normal", "kind": "newsletter", "id": "qc-082", "phase": "c"}
+{"date": "2026-12-15", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-083", "phase": "c"}
+{"date": "2026-12-16", "key": null, "value": null, "style": "noise", "kind": "chatter", "id": "qc-084", "phase": "c"}
+{"date": "2026-12-16", "key": "id_check", "value": "Account PIN", "style": "rephrase", "kind": "newsletter", "id": "qc-085", "phase": "c"}

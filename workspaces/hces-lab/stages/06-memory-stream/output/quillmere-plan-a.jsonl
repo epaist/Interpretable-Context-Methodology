@@ -1,0 +1,122 @@
+{"date": "2026-01-07", "key": "reconnect_fee", "value": "$25", "style": "normal", "id": "qa-001", "kind": "ticket", "phase": "a"}
+{"date": "2026-01-10", "key": "spark_cap", "value": "1.2 TB", "style": "normal", "id": "qa-002", "kind": "ticket", "phase": "a"}
+{"date": "2026-01-12", "key": "firmware", "value": "4.1", "style": "rephrase", "id": "qa-003", "kind": "call log", "phase": "a"}
+{"date": "2026-01-13", "key": "missed_appt_credit", "value": "$20", "style": "normal", "id": "qa-004", "kind": "call log", "phase": "a"}
+{"date": "2026-01-14", "key": "fiber_towns", "value": "Alder, Brook", "style": "normal", "id": "qa-005", "kind": "ticket", "phase": "a"}
+{"date": "2026-01-14", "key": "tech_visit_fee", "value": "$75 (customer-caused fault)", "style": "rephrase", "id": "qa-006", "kind": "ticket", "phase": "a"}
+{"date": "2026-01-16", "key": "email_support", "value": "support@quillmere.example", "style": "normal", "id": "qa-007", "kind": "ticket", "phase": "a"}
+{"date": "2026-01-17", "key": "autopay_discount", "value": "$3/mo", "style": "rephrase", "id": "qa-008", "kind": "call log", "phase": "a"}
+{"date": "2026-01-20", "key": "modem_fee", "value": "$10/mo", "style": "rephrase", "id": "qa-009", "kind": "call log", "phase": "a"}
+{"date": "2026-01-27", "key": "outage_credit", "value": "1 day per full 24 h down", "style": "rephrase", "id": "qa-010", "kind": "ticket", "phase": "a"}
+{"date": "2026-01-31", "key": "spark_price", "value": "$39/mo", "style": "rephrase", "id": "qa-011", "kind": "ticket", "phase": "a"}
+{"date": "2026-01-31", "key": "torrent_price", "value": "$79/mo", "style": "rephrase", "id": "qa-012", "kind": "ticket", "phase": "a"}
+{"date": "2026-02-07", "key": "install_fee", "value": "$99", "style": "normal", "id": "qa-013", "kind": "call log", "phase": "a"}
+{"date": "2026-02-08", "key": "spark_price", "value": "$39/mo", "style": "rephrase", "id": "qa-014", "kind": "ticket", "phase": "a"}
+{"date": "2026-02-09", "key": "retention_offer", "value": "3 months at 25% off", "style": "rephrase", "id": "qa-015", "kind": "call log", "phase": "a"}
+{"date": "2026-02-11", "key": "id_check", "value": "Last 4 of SSN", "style": "rephrase", "id": "qa-016", "kind": "call log", "phase": "a"}
+{"date": "2026-02-11", "key": "redlight_fix", "value": "Power-cycle the Q-Box", "style": "normal", "id": "qa-017", "kind": "ticket", "phase": "a"}
+{"date": "2026-02-13", "key": "refund_window", "value": "14 days", "style": "normal", "id": "qa-018", "kind": "ticket", "phase": "a"}
+{"date": "2026-02-15", "key": "founded", "value": "2009", "style": "normal", "id": "qa-019", "kind": "ticket", "phase": "a"}
+{"date": "2026-02-16", "key": "paperless_credit", "value": "$2/mo", "style": "normal", "id": "qa-020", "kind": "call log", "phase": "a"}
+{"date": "2026-02-17", "key": "contract_terms", "value": "12 or 24 months", "style": "normal", "id": "qa-021", "kind": "ticket", "phase": "a"}
+{"date": "2026-02-18", "key": "price_lock", "value": "12 months", "style": "normal", "id": "qa-022", "kind": "ticket", "phase": "a"}
+{"date": "2026-02-24", "key": "torrent_upload", "value": "50 Mbps", "style": "rephrase", "id": "qa-023", "kind": "ticket", "phase": "a"}
+{"date": "2026-02-27", "key": "late_fee", "value": "$5", "style": "normal", "id": "qa-024", "kind": "ticket", "phase": "a"}
+{"date": "2026-03-03", "key": "redlight_fix", "value": "Power-cycle the Q-Box", "style": "rephrase", "id": "qa-025", "kind": "call log", "phase": "a"}
+{"date": "2026-03-03", "key": "support_phone", "value": "1-800-555-0142", "style": "normal", "id": "qa-026", "kind": "ticket", "phase": "a"}
+{"date": "2026-03-08", "key": "maintenance_window", "value": "Tuesday 1 to 4 am", "style": "rephrase", "id": "qa-027", "kind": "call log", "phase": "a"}
+{"date": "2026-03-10", "key": "overage_fee", "value": "$10 per 50 GB", "style": "rephrase", "id": "qa-028", "kind": "ticket", "phase": "a"}
+{"date": "2026-03-12", "key": "support_phone", "value": "1-800-555-0142", "style": "normal", "id": "qa-029", "kind": "ticket", "phase": "a"}
+{"date": "2026-03-13", "key": "refund_window", "value": "14 days", "style": "normal", "id": "qa-030", "kind": "ticket", "phase": "a"}
+{"date": "2026-03-14", "key": "tier2_sla", "value": "Callback within 48 h", "style": "rephrase", "id": "qa-031", "kind": "call log", "phase": "a"}
+{"date": "2026-03-16", "key": "recording_retention", "value": "90 days", "style": "normal", "id": "qa-032", "kind": "ticket", "phase": "a"}
+{"date": "2026-03-20", "key": "torrent_download", "value": "Torrent 1G downloads at 1,000 Mbps", "style": "rephrase", "id": "qa-033", "kind": "call log", "phase": "a"}
+{"date": "2026-03-24", "key": "agent_refund_limit", "value": "Up to $50 without approval", "style": "rephrase", "id": "qa-034", "kind": "ticket", "phase": "a"}
+{"date": "2026-04-02", "key": "redlight_fix", "value": "Firmware 4.2 update", "style": "normal", "id": "qa-035", "kind": "ticket", "phase": "a"}
+{"date": "2026-04-04", "key": "agent_refund_limit", "value": "Up to $50 without approval", "style": "normal", "id": "qa-036", "kind": "call log", "phase": "a"}
+{"date": "2026-04-07", "key": "lite_plan", "value": "Lite 25 at $25/mo, open to new signups", "style": "normal", "id": "qa-037", "kind": "ticket", "phase": "a"}
+{"date": "2026-04-08", "key": "refund_window", "value": "14 days", "style": "stale", "id": "qa-038", "kind": "call log", "phase": "a"}
+{"date": "2026-04-09", "key": "late_fee", "value": "$8", "style": "normal", "id": "qa-039", "kind": "call log", "phase": "a"}
+{"date": "2026-04-11", "key": "payment_methods", "value": "Card, bank debit", "style": "rephrase", "id": "qa-040", "kind": "call log", "phase": "a"}
+{"date": "2026-04-12", "key": "etf", "value": "$150 flat", "style": "normal", "id": "qa-041", "kind": "ticket", "phase": "a"}
+{"date": "2026-04-15", "key": "overage_fee", "value": "$15 per 50 GB", "style": "rephrase", "id": "qa-042", "kind": "call log", "phase": "a"}
+{"date": "2026-04-15", "key": "tech_visit_fee", "value": "$95", "style": "normal", "id": "qa-043", "kind": "ticket", "phase": "a"}
+{"date": "2026-04-16", "key": "contract_none", "value": "Month-to-month is available on every plan", "style": "rephrase", "id": "qa-044", "kind": "ticket", "phase": "a"}
+{"date": "2026-04-18", "key": "firmware", "value": "4.2", "style": "rephrase", "id": "qa-045", "kind": "call log", "phase": "a"}
+{"date": "2026-04-18", "key": "status_page", "value": "status.quillmere.example", "style": "rephrase", "id": "qa-046", "kind": "call log", "phase": "a"}
+{"date": "2026-04-19", "key": "spark_price", "value": "$42", "style": "normal", "id": "qa-047", "kind": "ticket", "phase": "a"}
+{"date": "2026-04-22", "key": "autopay_discount", "value": "$5/mo", "style": "rephrase", "id": "qa-048", "kind": "ticket", "phase": "a"}
+{"date": "2026-04-22", "key": "support_phone", "value": "1-800-555-0142", "style": "stale", "id": "qa-049", "kind": "ticket", "phase": "a"}
+{"date": "2026-04-22", "key": "support_phone", "value": "1-888-555-0177", "style": "normal", "id": "qa-050", "kind": "ticket", "phase": "a"}
+{"date": "2026-04-23", "key": "glide_price", "value": "$59/mo", "style": "normal", "id": "qa-051", "kind": "call log", "phase": "a"}
+{"date": "2026-04-25", "key": "refund_window", "value": "14 days", "style": "stale", "id": "qa-052", "kind": "ticket", "phase": "a"}
+{"date": "2026-04-26", "key": "fiber_towns", "value": "Adds Calder", "style": "normal", "id": "qa-053", "kind": "ticket", "phase": "a"}
+{"date": "2026-04-27", "key": "outage_credit", "value": "1 day per full 24 h down", "style": "normal", "id": "qa-054", "kind": "ticket", "phase": "a"}
+{"date": "2026-04-27", "key": "recording_consent", "value": "Script v1", "style": "normal", "id": "qa-055", "kind": "ticket", "phase": "a"}
+{"date": "2026-05-03", "key": "refund_window", "value": "30 days", "style": "rephrase", "id": "qa-056", "kind": "call log", "phase": "a"}
+{"date": "2026-05-05", "key": "grace_period", "value": "30 days before suspension", "style": "normal", "id": "qa-057", "kind": "ticket", "phase": "a"}
+{"date": "2026-05-06", "key": "big_credit_approver", "value": "Supervisor approves outage credits over $100", "style": "normal", "id": "qa-058", "kind": "ticket", "phase": "a"}
+{"date": "2026-05-07", "key": "mesh_max", "value": "3 extenders", "style": "normal", "id": "qa-059", "kind": "ticket", "phase": "a"}
+{"date": "2026-05-12", "key": "payment_methods", "value": "Adds PayPal", "style": "early", "id": "qa-060", "kind": "call log", "phase": "a"}
+{"date": "2026-05-17", "key": "modem_fee", "value": "$12/mo", "style": "normal", "id": "qa-061", "kind": "ticket", "phase": "a"}
+{"date": "2026-05-18", "key": "glide_cap", "value": "Glide 500 has no data cap", "style": "normal", "id": "qa-062", "kind": "ticket", "phase": "a"}
+{"date": "2026-05-18", "key": "senior_discount", "value": "$5/mo", "style": "normal", "id": "qa-063", "kind": "ticket", "phase": "a"}
+{"date": "2026-05-21", "key": "redlight_fix", "value": "Firmware 4.2 update", "style": "normal", "id": "qa-064", "kind": "call log", "phase": "a"}
+{"date": "2026-05-22", "key": "agent_refund_limit", "value": "$100", "style": "normal", "id": "qa-065", "kind": "ticket", "phase": "a"}
+{"date": "2026-06-04", "key": "support_hours", "value": "8 am to 8 pm", "style": "rephrase", "id": "qa-066", "kind": "call log", "phase": "a"}
+{"date": "2026-06-17", "key": "reconnect_fee", "value": "Waived", "style": "normal", "id": "qa-067", "kind": "ticket", "phase": "a"}
+{"date": "2026-06-20", "key": "outage_credit", "value": "1 day per full 24 h down", "style": "stale", "id": "qa-068", "kind": "call log", "phase": "a"}
+{"date": "2026-06-20", "key": "outage_credit", "value": "Hourly, after 4 h down", "style": "normal", "id": "qa-069", "kind": "ticket", "phase": "a"}
+{"date": "2026-06-21", "key": "spark_cap", "value": "No cap", "style": "rephrase", "id": "qa-070", "kind": "ticket", "phase": "a"}
+{"date": "2026-06-24", "key": "glide_price", "value": "$55", "style": "normal", "id": "qa-071", "kind": "ticket", "phase": "a"}
+{"date": "2026-06-25", "key": "extender_model", "value": "QX-1", "style": "normal", "id": "qa-072", "kind": "call log", "phase": "a"}
+{"date": "2026-07-06", "key": "etf", "value": "$10 per remaining month", "style": "normal", "id": "qa-073", "kind": "ticket", "phase": "a"}
+{"date": "2026-07-15", "key": "billing_day", "value": "Bills issue on the 1st of each month", "style": "normal", "id": "qa-074", "kind": "ticket", "phase": "a"}
+{"date": "2026-07-20", "key": "install_fee", "value": "Free with 12-month contract", "style": "rephrase", "id": "qa-075", "kind": "ticket", "phase": "a"}
+{"date": "2026-08-03", "key": "support_phone", "value": "1-888-555-0177", "style": "rephrase", "id": "qa-076", "kind": "ticket", "phase": "a"}
+{"date": "2026-08-04", "key": "refund_window", "value": "30 days", "style": "normal", "id": "qa-077", "kind": "ticket", "phase": "a"}
+{"date": "2026-08-05", "key": "support_phone", "value": "1-888-555-0177", "style": "rephrase", "id": "qa-078", "kind": "call log", "phase": "a"}
+{"date": "2026-08-06", "key": "maintenance_window", "value": "Sunday 2 to 5 am", "style": "normal", "id": "qa-079", "kind": "call log", "phase": "a"}
+{"date": "2026-08-08", "key": "id_check", "value": "Account PIN", "style": "normal", "id": "qa-080", "kind": "call log", "phase": "a"}
+{"date": "2026-08-08", "key": "payment_methods", "value": "Adds PayPal", "style": "normal", "id": "qa-081", "kind": "call log", "phase": "a"}
+{"date": "2026-08-10", "key": "firmware", "value": "4.3", "style": "early", "id": "qa-082", "kind": "ticket", "phase": "a"}
+{"date": "2026-08-13", "key": "senior_discount", "value": "$8/mo", "style": "normal", "id": "qa-083", "kind": "ticket", "phase": "a"}
+{"date": "2026-08-18", "key": "support_hours", "value": "24/7", "style": "normal", "id": "qa-084", "kind": "ticket", "phase": "a"}
+{"date": "2026-08-25", "key": "lite_plan", "value": "Closed to new signups", "style": "normal", "id": "qa-085", "kind": "call log", "phase": "a"}
+{"date": "2026-08-27", "key": "spark_price", "value": "$42", "style": "rephrase", "id": "qa-086", "kind": "ticket", "phase": "a"}
+{"date": "2026-09-01", "key": "move_fee", "value": "$50", "style": "normal", "id": "qa-087", "kind": "call log", "phase": "a"}
+{"date": "2026-09-02", "key": "router_brand", "value": "Customer router is the Q-Box", "style": "rephrase", "id": "qa-088", "kind": "call log", "phase": "a"}
+{"date": "2026-09-09", "key": "mesh_max", "value": "5 extenders", "style": "rephrase", "id": "qa-089", "kind": "ticket", "phase": "a"}
+{"date": "2026-09-09", "key": "missed_appt_credit", "value": "$30", "style": "normal", "id": "qa-090", "kind": "ticket", "phase": "a"}
+{"date": "2026-09-14", "key": "extender_model", "value": "QX-2", "style": "normal", "id": "qa-091", "kind": "call log", "phase": "a"}
+{"date": "2026-09-18", "key": "big_credit_approver", "value": "Billing team lead", "style": "normal", "id": "qa-092", "kind": "call log", "phase": "a"}
+{"date": "2026-09-18", "key": "retention_offer", "value": "2 months at 30% off", "style": "rephrase", "id": "qa-093", "kind": "ticket", "phase": "a"}
+{"date": "2026-09-21", "key": "recording_consent", "value": "Script v2", "style": "normal", "id": "qa-094", "kind": "ticket", "phase": "a"}
+{"date": "2026-09-27", "key": "torrent_upload", "value": "200 Mbps", "style": "normal", "id": "qa-095", "kind": "ticket", "phase": "a"}
+{"date": "2026-09-29", "key": "price_lock", "value": "24 months for new signups", "style": "normal", "id": "qa-096", "kind": "call log", "phase": "a"}
+{"date": "2026-10-03", "key": "paperless_credit", "value": "Ended", "style": "rephrase", "id": "qa-097", "kind": "call log", "phase": "a"}
+{"date": "2026-10-04", "key": "spark_price", "value": "$44", "style": "rephrase", "id": "qa-098", "kind": "call log", "phase": "a"}
+{"date": "2026-10-07", "key": "outage_credit", "value": "Hourly, after 4 h down", "style": "normal", "id": "qa-099", "kind": "ticket", "phase": "a"}
+{"date": "2026-10-09", "key": "agent_refund_limit", "value": "$100", "style": "rephrase", "id": "qa-100", "kind": "call log", "phase": "a"}
+{"date": "2026-10-10", "key": "redlight_fix", "value": "Replace unit if batch QB-2", "style": "rephrase", "id": "qa-101", "kind": "ticket", "phase": "a"}
+{"date": "2026-10-14", "key": "torrent_price", "value": "$85", "style": "rephrase", "id": "qa-102", "kind": "ticket", "phase": "a"}
+{"date": "2026-10-16", "key": "modem_fee", "value": "$0 for Torrent, $12 others", "style": "normal", "id": "qa-103", "kind": "ticket", "phase": "a"}
+{"date": "2026-10-17", "key": "agent_refund_limit", "value": "$75", "style": "rephrase", "id": "qa-104", "kind": "call log", "phase": "a"}
+{"date": "2026-10-19", "key": "fiber_towns", "value": "Adds Dunmore", "style": "rephrase", "id": "qa-105", "kind": "ticket", "phase": "a"}
+{"date": "2026-10-19", "key": "install_fee", "value": "$49 for everyone", "style": "rephrase", "id": "qa-106", "kind": "call log", "phase": "a"}
+{"date": "2026-10-25", "key": "hq", "value": "Head office in Alder", "style": "normal", "id": "qa-107", "kind": "ticket", "phase": "a"}
+{"date": "2026-11-06", "key": "firmware", "value": "4.3", "style": "normal", "id": "qa-108", "kind": "call log", "phase": "a"}
+{"date": "2026-11-07", "key": "tier2_sla", "value": "Within 24 h", "style": "normal", "id": "qa-109", "kind": "call log", "phase": "a"}
+{"date": "2026-11-10", "key": "tech_visit_fee", "value": "$95", "style": "normal", "id": "qa-110", "kind": "ticket", "phase": "a"}
+{"date": "2026-11-14", "key": "recording_retention", "value": "60 days", "style": "normal", "id": "qa-111", "kind": "call log", "phase": "a"}
+{"date": "2026-11-18", "key": "spark_price", "value": "$44", "style": "rephrase", "id": "qa-112", "kind": "ticket", "phase": "a"}
+{"date": "2026-11-29", "key": "status_page", "value": "quillmere.example/status", "style": "normal", "id": "qa-113", "kind": "ticket", "phase": "a"}
+{"date": "2026-12-03", "key": "outage_credit", "value": "Hourly, after 4 h down", "style": "rephrase", "id": "qa-114", "kind": "ticket", "phase": "a"}
+{"date": "2026-12-04", "key": "refund_window", "value": "21 days", "style": "normal", "id": "qa-115", "kind": "call log", "phase": "a"}
+{"date": "2026-12-05", "key": "redlight_fix", "value": "Replace unit if batch QB-2", "style": "normal", "id": "qa-116", "kind": "ticket", "phase": "a"}
+{"date": "2026-12-08", "key": "contract_terms", "value": "12 months only", "style": "normal", "id": "qa-117", "kind": "ticket", "phase": "a"}
+{"date": "2026-12-08", "key": "refund_window", "value": "21 days", "style": "normal", "id": "qa-118", "kind": "call log", "phase": "a"}
+{"date": "2026-12-11", "key": "agent_refund_limit", "value": "$75", "style": "normal", "id": "qa-119", "kind": "call log", "phase": "a"}
+{"date": "2026-12-12", "key": "lite_plan", "value": "Existing Lite moved to Spark", "style": "rephrase", "id": "qa-120", "kind": "call log", "phase": "a"}
+{"date": "2026-12-13", "key": "move_fee", "value": "Free", "style": "normal", "id": "qa-121", "kind": "call log", "phase": "a"}
+{"date": "2026-12-14", "key": "grace_period", "value": "21 days", "style": "normal", "id": "qa-122", "kind": "call log", "phase": "a"}
