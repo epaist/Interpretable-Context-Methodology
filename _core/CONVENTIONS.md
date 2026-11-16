@@ -297,6 +297,37 @@ For non-code workspaces (content writing, course design), this pattern does not 
 
 ---
 
+## Pattern 16: HCES Gate
+
+Pattern 4 picks sections by hand, ahead of time. When a stage's reference files are too many or too large to scope by hand, the HCES gate picks the sections for the task at hand instead. Hand scope still wins where an author wrote it: it is free and exact.
+
+Run it before the stage, from the home root:
+
+```
+python -m hces gate workspaces/<workspace>/stages/<stage> --task "what the agent is about to do" --out <stage>/output/gate-kept.md --yes
+```
+
+The gate reads the stage's Inputs table. Upstream outputs, templates and the user load whole as before. Every other row's files are cut into heading sections, JEV scores each section against a rubric written for the task, and code keeps what passes the frozen cutoffs. The agent then reads `gate-kept.md` in place of the whole reference files. The file names every kept section, so a human can see what was loaded. An empty kept set means the references hold nothing for this task.
+
+There is no token budget: a 2000-token budget cut critical rule lists in the pilot, while cutoffs alone matched hand scope (47 of 50 audit checks against 48). Measured in `workspaces/hces-lab/`: the gate kept the needed passages 99% of the time against 89% for plain retrieval, at about a twelfth of the tokens; JEV costs a fraction of a cent per task. Small structured files (Layers 0 to 2) are still routed whole.
+
+---
+
+## Pattern 17: Workspace Memory
+
+Facts that change over time (prices, rules, versions, who approves what) do not belong in a reference file that someone has to keep rewriting. A workspace can keep them in an insert-only memory store instead, fed with dated records:
+
+```
+python -m hces remember --store workspaces/<workspace>/memory.sqlite --file note.md --date 2026-11-15 --yes
+python -m hces recall --store workspaces/<workspace>/memory.sqlite "What is the refund window?" --as-of 2026-11-15
+```
+
+`remember` extracts the facts a record states, gives each a key (one key per attribute, reused when the value changes), and has JEV check the key. `recall` returns the value in force on the date asked, with its history. Rules, in order: an official document in force (a record id starting `sop-` or `gov-`) outranks an announcement (`ann-`), which outranks everything else; a value starts on its effective date, not when it was announced; a later notice that moves a start date wins; one stray record cannot bring back an old value. Records are never edited or deleted; a correction is a new record.
+
+A local model (llama.cpp, Qwen3.5-9B) does the extraction and answering at no cost; `--claude` uses the Claude API. Measured on a made-up company over a year of tickets, SOPs, announcements and noise: 53 of 58 dated questions right.
+
+---
+
 ## Quality Guardrails
 
 - CONTEXT.md files: under 80 lines

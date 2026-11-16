@@ -1,0 +1,744 @@
+<title>HCES Core Design</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a single reading column with full-bleed bands; the pipeline runs left to right on wide screens and stacks on phones. */
+:root {
+  --bg: #eef1f4;
+  --surface: #ffffff;
+  --sunk: #e3e8ed;
+  --ink: #15202a;
+  --muted: #586774;
+  --line: #d3dbe2;
+  --accent: #2c46c4;
+  --accent-soft: #e4e8fb;
+  --keep: #1f7a4c;
+  --keep-soft: #dcefe4;
+  --cut: #a8443a;
+  --cut-soft: #f5e1de;
+  --unsure: #9a6a10;
+  --unsure-soft: #f6ead0;
+  --access: #2c7da0;
+  --analysis: #2c46c4;
+  --response: #7a4fb5;
+  --shadow: 0 1px 2px rgba(21,32,42,.06), 0 8px 24px rgba(21,32,42,.06);
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --r: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e141a; --surface: #151d25; --sunk: #1b252f; --ink: #e5ebf0; --muted: #93a2ae; --line: #283541;
+    --accent: #8299ff; --accent-soft: #1f2a52; --keep: #5cc48d; --keep-soft: #16301f; --cut: #e48174; --cut-soft: #3a1d1a;
+    --unsure: #e0b052; --unsure-soft: #352a12; --access: #5cb3d6; --analysis: #8299ff; --response: #b48ce6;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e141a; --surface: #151d25; --sunk: #1b252f; --ink: #e5ebf0; --muted: #93a2ae; --line: #283541;
+  --accent: #8299ff; --accent-soft: #1f2a52; --keep: #5cc48d; --keep-soft: #16301f; --cut: #e48174; --cut-soft: #3a1d1a;
+  --unsure: #e0b052; --unsure-soft: #352a12; --access: #5cb3d6; --analysis: #8299ff; --response: #b48ce6;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.12; }
+h2 { font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.1rem); font-weight: 700; letter-spacing: -.01em; }
+h3 { font-size: 1.1rem; font-weight: 600; }
+p { margin: 0; max-width: 66ch; }
+code, .mono { font-family: var(--f-mono); font-size: .88em; }
+.eyebrow { font-family: var(--f-mono); font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+/* Top bar */
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9; background: color-mix(in srgb, var(--surface) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+.bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.brand { display: flex; align-items: center; gap: 10px; font-family: var(--f-display); font-weight: 700; }
+.brand .mark { width: 22px; height: 22px; display: grid; place-items: center; }
+.nav { display: flex; gap: 4px; flex-wrap: wrap; }
+.nav a { color: var(--muted); text-decoration: none; font-size: .88rem; padding: 4px 10px; border-radius: 6px; }
+.nav a:hover { color: var(--ink); background: var(--sunk); }
+.theme { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; flex: none; }
+.theme button { font: inherit; font-size: .8rem; border: 0; background: transparent; color: var(--muted); padding: 5px 10px; cursor: pointer; }
+.theme button[aria-pressed="true"] { background: var(--accent); color: var(--surface); }
+@media (max-width: 760px) { .nav { display: none; } }
+
+/* Hero */
+.hero { padding-block: 56px 40px; display: grid; gap: 28px; }
+.status { display: inline-flex; align-items: center; gap: 8px; font-size: .82rem; color: var(--unsure); background: var(--unsure-soft); border-radius: 999px; padding: 4px 12px; width: fit-content; font-weight: 500; }
+.status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.hero h1 { font-size: clamp(2.3rem, 1.6rem + 3.2vw, 4.2rem); font-weight: 700; letter-spacing: -.025em; max-width: 18ch; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.lede { font-size: 1.15rem; color: var(--muted); max-width: 60ch; }
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); }
+.fact { padding: 16px 18px; display: grid; gap: 2px; }
+.fact + .fact { border-left: 1px solid var(--line); }
+.fact b { font-family: var(--f-display); font-size: 1.7rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.fact span { color: var(--muted); font-size: .86rem; }
+@media (max-width: 760px) { .facts { grid-template-columns: repeat(2, minmax(0,1fr)); } .fact:nth-child(3) { border-left: 0; } .fact:nth-child(n+3) { border-top: 1px solid var(--line); } }
+
+section { padding-block: 48px; border-top: 1px solid var(--line); }
+.sec-head { display: grid; gap: 10px; margin-bottom: 28px; }
+
+/* Pipeline */
+.bands, .flow { display: grid; grid-template-columns: repeat(7, minmax(0,1fr)); gap: 10px; }
+.bands { margin-bottom: 10px; }
+.band { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; padding: 6px 10px; border-radius: 6px; display: flex; justify-content: space-between; gap: 8px; }
+.band small { text-transform: none; letter-spacing: 0; opacity: .8; }
+.band.access { grid-column: 1 / span 2; color: var(--access); background: color-mix(in srgb, var(--access) 13%, transparent); }
+.band.analysis { grid-column: 3 / span 4; color: var(--analysis); background: color-mix(in srgb, var(--analysis) 13%, transparent); }
+.band.response { grid-column: 7 / span 1; color: var(--response); background: color-mix(in srgb, var(--response) 13%, transparent); }
+.node { position: relative; text-align: left; font: inherit; color: inherit; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 14px 14px 12px; cursor: pointer; display: grid; gap: 6px; align-content: start; min-width: 0; border-top: 3px solid var(--phase); transition: transform .15s ease, box-shadow .15s ease, border-color .15s; }
+.node:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.node[aria-pressed="true"] { border-color: var(--phase); box-shadow: 0 0 0 1px var(--phase), var(--shadow); }
+.node .n { font-family: var(--f-mono); font-size: .72rem; color: var(--muted); }
+.node .t { font-family: var(--f-display); font-weight: 600; font-size: 1.02rem; line-height: 1.2; }
+.node .s { font-size: .82rem; color: var(--muted); line-height: 1.4; }
+.node .mod { font-family: var(--f-mono); font-size: .72rem; color: var(--phase); }
+.node:not(:last-child)::after { content: ""; position: absolute; right: -9px; top: 50%; width: 8px; height: 8px; border-top: 2px solid var(--line); border-right: 2px solid var(--line); transform: translateY(-50%) rotate(45deg); }
+.p-access { --phase: var(--access); } .p-analysis { --phase: var(--analysis); } .p-response { --phase: var(--response); }
+.detail { margin-top: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 22px; display: grid; grid-template-columns: minmax(0,1.3fr) minmax(0,1fr); gap: 28px; border-left: 4px solid var(--phase); }
+.detail h3 { font-size: 1.35rem; margin-bottom: 8px; }
+.detail dl { margin: 0; display: grid; grid-template-columns: auto minmax(0,1fr); gap: 8px 14px; font-size: .9rem; }
+.detail dt { color: var(--muted); font-family: var(--f-mono); font-size: .76rem; text-transform: uppercase; letter-spacing: .06em; padding-top: 2px; }
+.detail dd { margin: 0; }
+.chip { display: inline-block; font-family: var(--f-mono); font-size: .74rem; padding: 2px 8px; border-radius: 999px; background: var(--sunk); color: var(--ink); margin: 0 4px 4px 0; }
+@media (max-width: 900px) {
+  .bands { display: none; }
+  .flow { grid-template-columns: minmax(0,1fr); gap: 12px; }
+  .node::before { content: attr(data-phase); position: absolute; right: 12px; top: 12px; font-family: var(--f-mono); font-size: .68rem; text-transform: uppercase; letter-spacing: .08em; color: var(--phase); }
+  .node:not(:last-child)::after { right: 50%; top: auto; bottom: -11px; transform: translateX(50%) rotate(135deg); }
+  .detail { grid-template-columns: minmax(0,1fr); }
+}
+
+/* Tree */
+.tree-grid { display: grid; grid-template-columns: minmax(0,1.5fr) minmax(0,1fr); gap: 24px; align-items: start; }
+@media (max-width: 900px) { .tree-grid { grid-template-columns: minmax(0,1fr); } }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); }
+.panel-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+.legend { display: flex; gap: 12px; flex-wrap: wrap; font-size: .78rem; color: var(--muted); }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+.tree { list-style: none; margin: 0; padding: 10px 12px 14px; font-size: .9rem; }
+.tree ul { list-style: none; margin: 0; padding-left: 22px; position: relative; }
+.tree ul::before { content: ""; position: absolute; left: 10px; top: 0; bottom: 14px; border-left: 1px solid var(--line); }
+.tree li { position: relative; }
+.tree ul > li::before { content: ""; position: absolute; left: -12px; top: 19px; width: 10px; border-top: 1px solid var(--line); }
+.row { display: grid; grid-template-columns: minmax(0,1fr) 92px 54px 74px; align-items: center; gap: 10px; padding: 6px 8px; border-radius: 6px; }
+.row:hover { background: var(--sunk); }
+.row .name { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.row .name span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.row .id { font-family: var(--f-mono); font-size: .76rem; color: var(--muted); }
+.twist { font: inherit; width: 22px; height: 22px; border: 1px solid var(--line); background: var(--surface); color: var(--muted); border-radius: 5px; cursor: pointer; flex: none; display: grid; place-items: center; padding: 0; }
+.twist svg { transition: transform .15s; }
+.twist[aria-expanded="false"] svg { transform: rotate(-90deg); }
+.lvl { font-family: var(--f-mono); font-size: .66rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; flex: none; }
+.meter { height: 6px; background: var(--sunk); border-radius: 3px; position: relative; overflow: visible; }
+.meter b { position: absolute; inset: 0 auto 0 0; border-radius: 3px; background: var(--muted); }
+.meter .cut { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--ink); opacity: .55; }
+.num { font-family: var(--f-mono); font-size: .8rem; text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); }
+.pill { font-family: var(--f-mono); font-size: .7rem; text-align: center; border-radius: 999px; padding: 2px 0; font-weight: 500; }
+.pill.kept { color: var(--keep); background: var(--keep-soft); }
+.pill.cut { color: var(--cut); background: var(--cut-soft); }
+.pill.unsure { color: var(--unsure); background: var(--unsure-soft); }
+.pill.crit { color: var(--accent); background: var(--accent-soft); }
+.pill.roll { color: var(--muted); background: var(--sunk); }
+.kept .meter b, .crit .meter b { background: var(--keep); }
+.cutrow .meter b { background: var(--cut); }
+.unsurerow .meter b { background: var(--unsure); }
+@media (max-width: 520px) { .row { grid-template-columns: minmax(0,1fr) 54px 64px; } .row .meter { display: none; } }
+.example-note { font-size: .8rem; color: var(--muted); padding: 0 18px 14px; }
+
+.budget { padding: 18px; display: grid; gap: 14px; }
+.budget-bar { display: flex; height: 38px; border-radius: 7px; overflow: hidden; background: var(--sunk); border: 1px solid var(--line); }
+.budget-bar div { border-right: 2px solid var(--surface); min-width: 0; display: grid; place-items: center; font-family: var(--f-mono); font-size: .66rem; color: var(--surface); white-space: nowrap; overflow: hidden; }
+.budget-bar .k { background: var(--keep); }
+.budget-bar .c { background: var(--accent); }
+.budget-bar .u { background: var(--unsure); }
+.budget-scale { display: flex; justify-content: space-between; font-family: var(--f-mono); font-size: .72rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.order { margin: 0; padding-left: 0; list-style: none; display: grid; gap: 6px; font-size: .86rem; counter-reset: o; }
+.order li { display: grid; grid-template-columns: 22px minmax(0,1fr) auto; gap: 8px; align-items: baseline; counter-increment: o; }
+.order li::before { content: counter(o); font-family: var(--f-mono); font-size: .72rem; color: var(--muted); }
+.order .num { text-align: right; }
+.verdict { font-size: .88rem; padding: 12px 14px; border-radius: 8px; background: var(--keep-soft); color: var(--keep); }
+
+/* Data model */
+.entities { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 900px) { .entities { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 560px) { .entities { grid-template-columns: minmax(0,1fr); } }
+.entity { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; display: grid; grid-template-rows: auto 1fr auto; }
+.entity header { padding: 12px 16px; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; border-bottom: 1px solid var(--line); background: var(--sunk); }
+.entity header h3 { font-size: 1.05rem; }
+.entity header span { font-family: var(--f-mono); font-size: .72rem; color: var(--muted); }
+.fields { list-style: none; margin: 0; padding: 10px 16px; font-family: var(--f-mono); font-size: .8rem; display: grid; gap: 4px; }
+.fields li { display: flex; justify-content: space-between; gap: 10px; }
+.fields li span { color: var(--muted); }
+.fields .pk { color: var(--accent); }
+.entity footer { padding: 10px 16px; border-top: 1px dashed var(--line); font-size: .8rem; color: var(--muted); }
+
+/* Rules and specs */
+.two { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 24px; }
+@media (max-width: 900px) { .two { grid-template-columns: minmax(0,1fr); } }
+pre { margin: 0; background: var(--sunk); border: 1px solid var(--line); border-radius: var(--r); padding: 18px; overflow-x: auto; font-family: var(--f-mono); font-size: .84rem; line-height: 1.6; }
+pre .k { color: var(--accent); } pre .c { color: var(--muted); }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; counter-reset: s; }
+.steps li { display: grid; grid-template-columns: 34px minmax(0,1fr); gap: 12px; counter-increment: s; }
+.steps li::before { content: counter(s); font-family: var(--f-display); font-weight: 700; font-size: 1rem; width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid var(--accent); color: var(--accent); display: grid; place-items: center; }
+.steps b { display: block; font-weight: 600; }
+.steps span { color: var(--muted); font-size: .92rem; }
+.specs { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 900px) { .specs { grid-template-columns: minmax(0,1fr); } }
+.spec { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 18px; display: grid; gap: 10px; align-content: start; }
+.spec ul { margin: 0; padding-left: 18px; font-size: .9rem; display: grid; gap: 6px; }
+.open { display: flex; flex-wrap: wrap; gap: 10px; }
+.open div { border: 1px dashed var(--line); border-radius: 8px; padding: 10px 14px; font-size: .9rem; }
+.open div b { display: block; font-family: var(--f-mono); font-size: .72rem; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: .08em; }
+.log { width: 100%; border-collapse: collapse; font-size: .84rem; min-width: 460px; }
+.log th { text-align: left; font-family: var(--f-mono); font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 500; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+.log td { padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.log tr:last-child td { border-bottom: 0; }
+.log td.num { white-space: nowrap; }
+.ok { color: var(--keep); font-weight: 600; } .wait { color: var(--unsure); font-weight: 600; }
+.rub { display: grid; gap: 6px; }
+.rub b { font-family: var(--f-mono); font-size: .82rem; }
+.rub ol { margin: 0; padding-left: 0; list-style: none; display: grid; gap: 3px; font-size: .84rem; }
+.rub ol li { display: grid; grid-template-columns: 22px minmax(0,1fr); gap: 6px; }
+.rub ol li span:first-child { font-family: var(--f-mono); color: var(--muted); }
+.changes { margin: 0; padding: 14px 18px 16px 36px; display: grid; gap: 8px; font-size: .9rem; }
+.changes b { font-weight: 600; }
+footer.page { padding-block: 32px 48px; color: var(--muted); font-size: .82rem; border-top: 1px solid var(--line); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<header class="bar">
+  <div class="wrap">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 22 22" aria-hidden="true"><path d="M2 4h18l-6.5 8v6l-5 2.5V12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      HCES Core
+    </div>
+    <nav class="nav" aria-label="Sections">
+      <a href="#measured">Results</a><a href="#pipeline">Pipeline</a><a href="#tree">Hierarchy</a><a href="#model">Data model</a><a href="#rules">Rules</a><a href="#build">Build</a>
+    </nav>
+    <div class="theme" role="group" aria-label="Color theme">
+      <button type="button" id="t-light" data-t="light" aria-pressed="false">Light</button>
+      <button type="button" id="t-dark" data-t="dark" aria-pressed="false">Dark</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <span class="status">Memory phase A: 50 of 57 dated questions right, bar 95% not met</span>
+    <h1>A cheap judge reads every candidate. <em>Code decides</em> what Claude sees.</h1>
+    <p class="lede">HCES sits in front of ICM's large reference files. It retrieves candidate passages, has JEV answer typed questions about each one, and fills a fixed token budget with whole passages, keeping a record of every keep and cut.</p>
+    <div class="facts">
+      <div class="fact"><b>6,000</b><span>token budget per task</span></div>
+      <div class="fact"><b>512</b><span>max tokens per passage</span></div>
+      <div class="fact"><b>3 + RAM</b><span>timings plus peak memory, every run</span></div>
+      <div class="fact"><b>6</b><span>parallel JEV workers</span></div>
+    </div>
+  </div>
+
+  <section id="measured">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Measured, not planned</span>
+        <h2>Results so far</h2>
+        <p>Every number here comes from a real run on the PC. This section grows after each run; the rest of the page is the design.</p>
+      </div>
+      <div class="facts" id="measuredFacts"></div>
+      <div class="two" style="margin-top:24px">
+        <div class="panel">
+          <div class="panel-head"><h3>Run log</h3><span class="mono" id="runCount"></span></div>
+          <div style="overflow-x:auto">
+            <table class="log" id="runLog"></table>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h3>Rubrics in use</h3><span class="mono">versioned, hashed</span></div>
+          <div id="rubrics" style="padding:16px 18px;display:grid;gap:14px"></div>
+        </div>
+      </div>
+      <div class="panel" style="margin-top:24px">
+        <div class="panel-head"><h3>Design changes from real runs</h3></div>
+        <ul class="changes" id="changes"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="pipeline">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">The gate, in order</span>
+        <h2>From one prompt to a budgeted context</h2>
+        <p>Each step is timed under one of three spans. Select a step to see what it reads, what it decides and which module owns it.</p>
+      </div>
+      <div class="bands" aria-hidden="true">
+        <div class="band access">access <small>prompt to candidates</small></div>
+        <div class="band analysis">analysis <small>candidates to filled budget</small></div>
+        <div class="band response">response</div>
+      </div>
+      <div class="flow" id="flow" role="group" aria-label="Pipeline steps"></div>
+      <div class="detail" id="detail" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section id="tree">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Hierarchy and rollup</span>
+        <h2>Passages are judged; chapters and volumes inherit</h2>
+        <p>A parent's score is its best child's score, plus a count of children that passed. That tells you which chapters mattered and breaks ties during the budget fill. Expand or collapse a chapter; the page remembers your choice.</p>
+      </div>
+      <div class="tree-grid">
+        <div class="panel">
+          <div class="panel-head">
+            <h3>Unit tree</h3>
+            <div class="legend">
+              <span><i style="background:var(--keep)"></i>kept</span>
+              <span><i style="background:var(--accent)"></i>critical keep</span>
+              <span><i style="background:var(--unsure)"></i>unsure band</span>
+              <span><i style="background:var(--cut)"></i>cut</span>
+            </div>
+          </div>
+          <ul class="tree" id="treeRoot"></ul>
+          <p class="example-note">Illustrative example data, not a real run. Provisional cutoff 0.60, unsure band 0.50 to 0.60.</p>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h3>Budget fill</h3><span class="mono" id="budgetUsed"></span></div>
+          <div class="budget">
+            <div class="budget-bar" id="budgetBar" role="img"></div>
+            <div class="budget-scale"><span>0</span><span>3,000</span><span>6,000 tokens</span></div>
+            <ol class="order" id="order"></ol>
+            <div class="verdict" id="verdict"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="model">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Data model</span>
+        <h2>Six records, none ever overwritten</h2>
+        <p>Units are written once to the knowledge base. Everything a run produces goes into an insert-only results store, so a rerun adds rows and never overwrites them.</p>
+      </div>
+      <div class="entities" id="entities"></div>
+    </div>
+  </section>
+
+  <section id="rules">
+    <div class="wrap two">
+      <div class="sec-head" style="margin:0">
+        <span class="eyebrow">Judge interface</span>
+        <h2>One interface, any judge</h2>
+        <p>JEV is the first implementation. A local model can be added later behind the same four members without touching retrieval, rollup or the store.</p>
+        <pre><span class="c"># hces/judge.py</span>
+<span class="k">judge</span>(task, rubric, units)    -&gt; judgments
+<span class="k">answerable</span>(task, kept_units) -&gt; probability
+<span class="k">estimate_cost</span>(task, rubric, units) -&gt; dollars
+<span class="k">model_id</span>
+
+<span class="c"># hces/embed.py (same idea, for the bake-off)</span>
+<span class="k">embed</span>(texts) -&gt; vectors
+<span class="k">model_id</span></pre>
+        <p style="font-size:.9rem;color:var(--muted)">One request per unit: the state holds the task and the unit's text, the questions are the rubric's. Failed requests are retried, then recorded as failed, never skipped. Open: whether the SDK can judge several units in one request.</p>
+      </div>
+      <div class="sec-head" style="margin:0">
+        <span class="eyebrow">Rollup and budget fill, all in code</span>
+        <h2>Six rules, applied in order</h2>
+        <ol class="steps">
+          <li><div><b>Unit score</b><span>Weighted mean of its Score answers, scaled 0 to 1.</span></div></li>
+          <li><div><b>Critical keep</b><span>A critical Noul question past its cutoff keeps the unit whatever its score.</span></div></li>
+          <li><div><b>Parent score</b><span>Best child score plus the count of children that passed.</span></div></li>
+          <li><div><b>Budget fill</b><span>Sort by critical, then score, then retrieval rank. Add whole units until 6,000 tokens.</span></div></li>
+          <li><div><b>Unsure band</b><span>Units just under the cutoff are kept if budget remains. Recall first.</span></div></li>
+          <li><div><b>Not in the documents</b><span>If nothing passes, or answerability is too low, the gate says so instead of padding.</span></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="build">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Under the hood</span>
+        <h2>Store, indexes and setup</h2>
+      </div>
+      <div class="specs">
+        <div class="spec"><h3>Results store</h3><ul>
+          <li><code>hces/data/results.db</code>, SQLite</li>
+          <li>Tables: rubrics, runs, judgments, decisions</li>
+          <li>Triggers abort any UPDATE or DELETE; a unit test proves it</li>
+          <li>A rerun gets a new run ID</li></ul></div>
+        <div class="spec"><h3>Indexes</h3><ul>
+          <li>One file per volume: <code>kb/index/&lt;slug&gt;.db</code></li>
+          <li>sqlite-vec, 384-dimension bge-small vectors</li>
+          <li>FTS5 keyword table beside it</li>
+          <li>Hybrid merge by reciprocal rank fusion</li></ul></div>
+        <div class="spec"><h3>On the PC</h3><ul>
+          <li><code>D:\0001_LOCAL_RAG\.venv</code>, Python 3.12.10</li>
+          <li>typesafe-sdk 0.7.5, sqlite-vec 0.1.9, fastembed 0.9.1</li>
+          <li>psutil for peak memory, pytest for tests</li>
+          <li>JEV key already in the user environment</li></ul></div>
+      </div>
+      <div class="sec-head" style="margin-top:36px">
+        <span class="eyebrow">Decided later</span>
+        <div class="open">
+          <div><b>Stage 03</b>Retrieval variant and k (20, 50, 100)</div>
+          <div><b>Stage 03</b>Embedder bake-off: fastembed vs fasttextembed</div>
+          <div><b>Stage 04</b>Cutoffs, tuned and frozen</div>
+          <div><b>Stage 06</b>The memory store</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="page"><div class="wrap">Source: <code>workspaces/hces-lab/stages/01-setup-smoke/output/core-design.md</code> in D:\0001_LOCAL_RAG. Built from scratch on the HTES idea; no HTES code is ported.</div></footer>
+
+<script>
+(function () {
+  var store = {
+    get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  };
+
+  /* Theme */
+  var root = document.documentElement;
+  function sysDark() { return window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches; }
+  function applyTheme(t) {
+    if (t) root.setAttribute('data-theme', t);
+    var eff = t || (sysDark() ? 'dark' : 'light');
+    document.querySelectorAll('.theme button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.t === eff)); });
+  }
+  applyTheme(store.get('hces-theme'));
+  document.querySelectorAll('.theme button').forEach(function (b) {
+    b.addEventListener('click', function () { store.set('hces-theme', b.dataset.t); applyTheme(b.dataset.t); });
+  });
+
+  /* Pipeline */
+  var steps = [
+    { id: 'task', phase: 'access', t: 'Task and rubric', s: 'Claude writes the questions this task needs.', mod: 'rubric.py',
+      reads: 'The task prompt.', does: 'Builds a versioned rubric: relevance Score, a critical Noul flag, metadata Choices, one answerability question.', out: 'A rubric row with its hash, stored before any judging.' },
+    { id: 'retrieve', phase: 'access', t: 'Retrieve', s: 'Vector plus keyword search, merged.', mod: 'retrieve.py',
+      reads: 'The volume index: sqlite-vec vectors and the FTS5 table.', does: 'Pulls the top k candidates from each, merges them by reciprocal rank fusion.', out: 'k candidate units with retrieval ranks. Retrieval sets the ceiling: JEV cannot rescue a unit that was never retrieved.' },
+    { id: 'judge', phase: 'analysis', t: 'Judge', s: 'JEV answers the rubric for each unit.', mod: 'judge.py',
+      reads: 'Each candidate unit with the task as shared state.', does: 'One request per unit, six in parallel. Typed answers only: Score, Noul, Choice.', out: 'Insert-only judgment rows with model ID and tokens.' },
+    { id: 'rollup', phase: 'analysis', t: 'Roll up', s: 'Scores climb the hierarchy.', mod: 'rollup.py',
+      reads: 'Judgments for every unit.', does: 'Unit score = weighted mean of Score answers. Parent = best child plus count passed.', out: 'Unit and parent scores, used for ranking and reporting.' },
+    { id: 'fill', phase: 'analysis', t: 'Fill budget', s: 'Whole units, best first, until 6,000 tokens.', mod: 'rollup.py',
+      reads: 'Scored units, cutoffs, the token budget.', does: 'Critical keeps first, then score, then retrieval rank. Unsure-band units go in only if room remains.', out: 'The kept set, inside budget, never a half passage.' },
+    { id: 'answer', phase: 'analysis', t: 'Answerable?', s: 'One check on the kept evidence.', mod: 'judge.py',
+      reads: 'The task and the kept units (split above 32k tokens).', does: 'Asks JEV whether the evidence is enough to answer.', out: 'Go ahead, or the reply "not in the documents".' },
+    { id: 'handoff', phase: 'response', t: 'Hand off', s: 'Context to Claude, manifest to disk.', mod: 'gate.py, manifest.py',
+      reads: 'The kept set and every decision.', does: 'Writes the context Claude reads and a kept/cut manifest beside the stage output.', out: 'Context file, manifest, and the run row with three timings and peak memory.' }
+  ];
+  var flow = document.getElementById('flow'), detail = document.getElementById('detail');
+  steps.forEach(function (st, i) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.id = 'node-' + st.id; b.className = 'node p-' + st.phase; b.dataset.phase = st.phase;
+    b.innerHTML = '<span class="n">' + (i + 1) + ' of 7</span><span class="t">' + st.t + '</span><span class="s">' + st.s + '</span><span class="mod">' + st.mod + '</span>';
+    b.addEventListener('click', function () { select(st.id); });
+    flow.appendChild(b);
+  });
+  function select(id) {
+    var st = steps.filter(function (x) { return x.id === id; })[0] || steps[0];
+    steps.forEach(function (x) { document.getElementById('node-' + x.id).setAttribute('aria-pressed', String(x.id === st.id)); });
+    detail.className = 'detail p-' + st.phase;
+    detail.innerHTML = '<div><span class="eyebrow">' + st.phase + ' span</span><h3>' + st.t + '</h3><p>' + st.does + '</p></div>' +
+      '<dl><dt>Reads</dt><dd>' + st.reads + '</dd><dt>Writes</dt><dd>' + st.out + '</dd><dt>Module</dt><dd><span class="chip">hces/' + st.mod.split(', ').join('</span><span class="chip">hces/') + '</span><span class="chip">timing.py</span></dd></dl>';
+    store.set('hces-step', st.id);
+  }
+  select(store.get('hces-step') || 'judge');
+
+  /* Tree and budget (illustrative) */
+  var CUT = 0.60, BAND = 0.50, BUDGET = 6000;
+  var vol = { id: 'v1', name: 'Example volume', level: 'volume', children: [
+    { id: 'v1/c03', name: 'Chapter 3', level: 'chapter', children: [
+      { id: 'v1/c03/p0112', tokens: 420, score: 0.42, rank: 9 },
+      { id: 'v1/c03/p0118', tokens: 505, score: 0.81, rank: 2 },
+      { id: 'v1/c03/p0119', tokens: 470, score: 0.66, rank: 6 }
+    ]},
+    { id: 'v1/c07', name: 'Chapter 7', level: 'chapter', children: [
+      { id: 'v1/c07/p0233', tokens: 488, score: 0.91, rank: 1 },
+      { id: 'v1/c07/p0236', tokens: 460, score: 0.38, rank: 4, critical: true },
+      { id: 'v1/c07/p0241', tokens: 512, score: 0.72, rank: 3 },
+      { id: 'v1/c07/p0244', tokens: 395, score: 0.55, rank: 8 }
+    ]},
+    { id: 'v1/c12', name: 'Chapter 12', level: 'chapter', children: [
+      { id: 'v1/c12/p0401', tokens: 498, score: 0.29, rank: 5 },
+      { id: 'v1/c12/p0407', tokens: 450, score: 0.63, rank: 7 },
+      { id: 'v1/c12/p0409', tokens: 507, score: 0.52, rank: 10 }
+    ]},
+    { id: 'v1/c15', name: 'Chapter 15', level: 'chapter', children: [
+      { id: 'v1/c15/p0502', tokens: 480, score: 0.21, rank: 11 },
+      { id: 'v1/c15/p0506', tokens: 455, score: 0.34, rank: 12 }
+    ]}
+  ]};
+
+  var units = [];
+  vol.children.forEach(function (ch) {
+    ch.children.forEach(function (p) { p.level = 'passage'; p.parent = ch; units.push(p); });
+    ch.score = Math.max.apply(null, ch.children.map(function (p) { return p.score; }));
+    ch.passed = ch.children.filter(function (p) { return p.critical || p.score >= CUT; }).length;
+  });
+  vol.score = Math.max.apply(null, vol.children.map(function (c) { return c.score; }));
+  vol.passed = vol.children.filter(function (c) { return c.passed > 0; }).length;
+
+  /* Fill: critical first, then passed by score (parent score breaks ties), then retrieval rank; unsure band after if room. */
+  function tier(u) { return u.critical ? 0 : u.score >= CUT ? 1 : u.score >= BAND ? 2 : 3; }
+  var ordered = units.slice().sort(function (a, b) {
+    return tier(a) - tier(b) || b.score - a.score || b.parent.score - a.parent.score || a.rank - b.rank;
+  });
+  var used = 0;
+  ordered.forEach(function (u) {
+    var t = tier(u);
+    if (t === 3) { u.state = 'cut'; return; }
+    if (used + u.tokens <= BUDGET) { used += u.tokens; u.state = t === 0 ? 'crit' : t === 2 ? 'unsure' : 'kept'; }
+    else { u.state = 'cut'; u.overBudget = true; }
+  });
+
+  function meter(score) {
+    return '<div class="meter" aria-hidden="true"><b style="width:' + Math.round(score * 100) + '%"></b><span class="cut" style="left:' + (CUT * 100) + '%"></span></div>';
+  }
+  var pillText = { kept: 'kept', crit: 'critical', unsure: 'unsure', cut: 'cut' };
+  var rowClass = { kept: 'kept', crit: 'crit', unsure: 'unsurerow', cut: 'cutrow' };
+  var chev = '<svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
+
+  var open;
+  try { open = JSON.parse(store.get('hces-open') || 'null'); } catch (e) { open = null; }
+  if (!open) open = { 'v1': true, 'v1/c03': true, 'v1/c07': true, 'v1/c12': false, 'v1/c15': false };
+
+  function parentRow(n) {
+    var isOpen = !!open[n.id];
+    return '<div class="row"><div class="name"><button type="button" class="twist" id="tw-' + n.id.replace(/\//g, '-') + '" data-id="' + n.id + '" aria-expanded="' + isOpen + '" aria-label="Toggle ' + n.name + '">' + chev + '</button><span class="lvl">' + n.level + '</span><span>' + n.name + '</span></div>' +
+      meter(n.score) + '<span class="num">' + n.score.toFixed(2) + '</span><span class="pill roll">' + n.passed + ' of ' + n.children.length + '</span></div>';
+  }
+  function leafRow(p) {
+    return '<div class="row ' + rowClass[p.state] + '"><div class="name"><span class="lvl">psg</span><span class="id">' + p.id.split('/').pop() + '</span><span class="id">' + p.tokens + ' tok</span></div>' +
+      meter(p.score) + '<span class="num">' + p.score.toFixed(2) + '</span><span class="pill ' + (p.state === 'crit' ? 'crit' : p.state) + '">' + pillText[p.state] + '</span></div>';
+  }
+  function renderTree() {
+    var html = '<li>' + parentRow(vol);
+    if (open[vol.id]) {
+      html += '<ul>';
+      vol.children.forEach(function (ch) {
+        html += '<li>' + parentRow(ch);
+        if (open[ch.id]) { html += '<ul>' + ch.children.map(function (p) { return '<li>' + leafRow(p) + '</li>'; }).join('') + '</ul>'; }
+        html += '</li>';
+      });
+      html += '</ul>';
+    }
+    html += '</li>';
+    var tr = document.getElementById('treeRoot');
+    tr.innerHTML = html;
+    tr.querySelectorAll('.twist').forEach(function (b) {
+      b.addEventListener('click', function () {
+        open[b.dataset.id] = !open[b.dataset.id];
+        store.set('hces-open', JSON.stringify(open));
+        renderTree();
+        var again = document.getElementById(b.id); if (again) again.focus();
+      });
+    });
+  }
+  renderTree();
+
+  var kept = ordered.filter(function (u) { return u.state !== 'cut'; });
+  var bar = document.getElementById('budgetBar');
+  bar.innerHTML = kept.map(function (u) {
+    var cls = u.state === 'crit' ? 'c' : u.state === 'unsure' ? 'u' : 'k';
+    return '<div class="' + cls + '" style="flex:0 0 ' + (u.tokens / BUDGET * 100) + '%" title="' + u.id + ', ' + u.tokens + ' tokens">' + u.id.split('/').pop() + '</div>';
+  }).join('');
+  bar.setAttribute('aria-label', kept.length + ' passages fill ' + used + ' of ' + BUDGET + ' tokens');
+  document.getElementById('budgetUsed').textContent = used.toLocaleString('en-US') + ' / 6,000';
+  document.getElementById('order').innerHTML = kept.map(function (u) {
+    var why = u.state === 'crit' ? 'critical flag' : u.state === 'unsure' ? 'unsure band, room left' : 'score ' + u.score.toFixed(2);
+    return '<li><span><span class="mono">' + u.id + '</span> <span style="color:var(--muted)">' + why + '</span></span><span class="num">' + u.tokens + '</span></li>';
+  }).join('');
+  var cutCount = units.length - kept.length;
+  document.getElementById('verdict').textContent = kept.length + ' of ' + units.length + ' candidates kept, ' + cutCount + ' cut, ' + (BUDGET - used).toLocaleString('en-US') + ' tokens unused. Evidence passes the answerability check, so the context goes to Claude.';
+
+  /* Measured results: append a row after every run */
+  var RESULTS = {
+    facts: [
+      ['86% / 82%', 'voice bot: Smart Turn tuned on Bee\'s voice vs the stock model on held-out turns; cut-offs on pauses 5 vs 9, other speakers unchanged at 93%'],
+      ['37 / 40', '1911 Britannica, 210,592 passages: gold passage kept by the gate on random-article questions; 8 of 8 unanswerables kept nothing; Sonnet answers 0 wrong'],
+      ['0.47 s', 'voice bot: first-question gate after the launch warm-up (4 to 16 s cold); keeping the 50 JEV connections open between questions is free'],
+      ['50 / 57', 'memory phase A: dated questions answered right after replaying 122 tickets and call logs (bar 95%); every stale-quote contradiction held'],
+      ['0.95 s', 'voice bot: median time to first sound after you stop talking (stage 4, a short "let me check")'],
+      ['about 3 s', 'voice bot: median time to the first spoken answer words; Haiku 5.5 takes about 1.5 s to start on its own'],
+      ['12 of 12', 'spoken follow-ups found the right passage once Haiku rewrote "he" or "she" into the name; a recent-source boost added nothing'],
+      ['47 / 48', 'audit checks passed by the no-budget gate vs hand scope on workspace-builder (45 with a 2000-token budget)'],
+      ['36x', 'less context on instruction files: 1,042 vs 37,486 input tokens, 23 of 24 vs 24 of 24 answered'],
+      ['96% / 95%', 'gated vs whole-book answers on 73 answerable questions, at $0.86 vs $13.00'],
+      ['3.0 / 3', 'JEV relevance on the answering passage, confidence 1.0'],
+      ['1.7 s', 'one JEV request, network included'],
+      ['380', 'tokens billed (estimate said 113)'],
+      ['237 MB', 'peak memory, whole smoke run'],
+      ['827k', 'bge tokens across the three test books'],
+      ['76', 'exam questions: 46 real, 30 planted needles'],
+      ['58 MB', 'peak memory, full stage 02 build and audit'],
+      ['99%', 'gold caught by RAG + JEV on all three books (RAG only 89%); 97% on the held-out rotation'],
+      ['474', 'median context tokens with frozen cutoffs, vs 5,946 for RAG only'],
+      ['1 of 6', 'unanswerable fresh runs flagged: answerability is the weak spot'],
+      ['1,000', 'median context tokens with JEV, vs 5,900 for RAG only'],
+      ['$0.64', 'JEV cost for 16,925 judgments, 0 failures']
+    ],
+    runs: [
+      { date: '2026-11-01', what: 'Unit tests, all modules', result: '41 passed in 2.5 s', status: 'ok' },
+      { date: '2026-11-01', what: 'Toy index, 3 passages, fastembed bge-small', result: '1,710 ms build, 231 MB peak', status: 'ok' },
+      { date: '2026-11-01', what: 'Hybrid search: "Why does the lighthouse keeper leave the island?"', result: 'Answering passage ranked first (after fix)', status: 'ok' },
+      { date: '2026-11-01', what: 'JEV smoke call, 1 passage, 1 question', result: 'Level 3.0 of 3; 380 tokens, $0.000016; access 1,817 ms, analysis 1,665 ms, response 5 ms', status: 'ok' },
+      { date: '2026-11-01', what: 'Insert-only check on the real results store', result: 'DELETE on judgments refused', status: 'ok' },
+      { date: '2026-11-01', what: 'Stage 02 cut, three books, chaptered and plain shapes', result: '109k / 256k / 462k tokens; 2,437 chaptered and 2,351 plain passages; max 512 tokens', status: 'ok' },
+      { date: '2026-11-01', what: 'Stage 02 answer key build and audit', result: '76 questions, 9 decoys, 0 failures; 42 s, 58 MB peak; same bytes on Linux and Windows', status: 'ok' },
+      { date: '2026-11-01', what: 'Unit tests after stage 02', result: '53 passed in 3.4 s', status: 'ok' },
+      { date: '2026-11-01', what: 'Stage 03 index build, Secret Adversary, batch 64', result: '1,495 and 2,030 MB peak; 7 to 9 passages/s (fixed below)', status: 'wait' },
+      { date: '2026-11-01', what: 'Same index build, batch 1', result: '243 and 253 MB peak; 12 passages/s; 28 s per shape', status: 'ok' },
+      { date: '2026-11-01', what: 'RAG only, 300 runs (25 questions, 2 shapes, vector and hybrid, k 20/50/100)', result: 'Hybrid keeps gold for 91% at k 50+, vector 55 to 77%; hybrid catches all needles; 11 ms retrieval', status: 'ok' },
+      { date: '2026-11-01', what: 'Embedder bake-off in WSL', result: 'fasttextembed 5.9/s vs 14.2/s, 249 vs 285 MB, cosine median 0.947. Stay on fastembed', status: 'ok' },
+      { date: '2026-11-01', what: 'JEV judge pass: 25 questions x every passage x 2 shapes', result: '16,925 requests, 0 failures, $0.64, about 61 passages/s, 69 MB peak', status: 'ok' },
+      { date: '2026-11-01', what: 'RAG + JEV, hybrid, k 100', result: 'Gold kept 95%, needles 100%, unanswerable flagged 100%, none wrongly flagged; about 1,000-token context vs 5,900 for RAG only', status: 'ok' },
+      { date: '2026-11-01', what: 'JEV on everything', result: 'Gold kept 100% in both shapes; 5.5 s per question per shape', status: 'ok' },
+      { date: '2026-11-01', what: 'Unit tests after stage 03', result: '61 passed in 3.9 s', status: 'ok' },
+      { date: '2026-11-01', what: 'Gold review, answer key v2', result: '27 gold passages added to 6 questions, 2 lookalikes marked as decoys; audit 0 failures', status: 'ok' },
+      { date: '2026-11-01', what: 'Stage 03 rescored on key v2 (no new JEV calls)', result: 'Gold kept at k 50: hybrid RAG 100%, RAG + JEV 100%, JEV on everything 100%; vector RAG 68 to 86%. JEV keeps lookalikes for q07 and q12', status: 'wait' },
+      { date: '2026-11-01', what: 'Unit tests after key v2', result: '63 passed in 3.6 s', status: 'ok' },
+      { date: '2026-11-01', what: 'JEV judge pass, Moonstone and Way We Live Now', result: '104,585 requests, 0 failures, $4.02', status: 'ok' },
+      { date: '2026-11-01', what: 'Gold review, key v2 for Moonstone and Way We Live Now', result: '96 gold passages added to 19 questions, 5 lookalikes marked', status: 'ok' },
+      { date: '2026-11-01', what: 'Cutoff rotation, tune on two books, test on the third', result: 'Pooled gold caught 97%, needles 100%; frozen at score 0.75, no unsure band, fact p 0.9', status: 'ok' },
+      { date: '2026-11-01', what: 'Scorecard, frozen cutoffs, k 50', result: 'RAG + JEV gold 99%, needles 100%, 474 tokens, 0.9 s; RAG only gold 89%, needles 90%, 5,946 tokens', status: 'ok' },
+      { date: '2026-11-01', what: 'Fresh confirmation set, 9 questions', result: 'Answerable 12 of 12 right; unanswerable flagged in 1 of 6 runs', status: 'wait' },
+      { date: '2026-11-01', what: 'Run-to-run noise, Secret Adversary judged twice', result: 'Kept-set overlap 0.98, 47 of 50 identical, same gold outcome in all 44', status: 'ok' },
+      { date: '2026-11-01', what: 'Second rubric, 10 questions reworded, both shapes', result: 'Kept-set overlap 0.87 (noise 0.98), 11 of 20 identical, same gold outcome in all 20; $0.57', status: 'ok' },
+      { date: '2026-11-01', what: 'Stage 04 audit', result: 'Needles 100%, gold 97% pooled, beats RAG only, budget max 5,992: pass. Fresh unanswerables 1 of 6: fail. End-to-end: stage 05. Speed bars pass. Spend $5.82', status: 'wait' },
+      { date: '2026-11-02', what: 'Answerability follow-up: 6 holdout unanswerables, 3 stricter JEV checks', result: 'Holdout 12 of 12 flagged (nothing kept). All 36 unanswerable runs: 32 flagged, 0 of 144 answerable wrongly flagged. No stricter check fixes the 4 misses without wrongly refusing 4% or more; rule kept. $0.41', status: 'ok' },
+      { date: '2026-11-02', what: 'Stage 05 end to end: Opus 5.5 answers from gated context vs the whole book, blind graded, 91 questions', result: 'Answerable 96% gated vs 95% full; unanswerable abstained 18 of 18 in both; 0 wrong gated vs 1 full. 1.7 s vs 2.8 s median; $0.86 vs $13.00. Bar passes. $15.35', status: 'ok' },
+      { date: '2026-11-02', what: 'Instruction files cut by heading: 34 files, 201 sections, 30 questions (24 answerable, 6 not), frozen cutoffs', result: 'Gold kept 24 of 24 by every arm at 2000 and 6000 tokens; RAG + JEV median 570 tokens; unanswerables kept nothing 6 of 6 (RAG only 0 of 6). JEV $0.17', status: 'ok' },
+      { date: '2026-11-02', what: 'Instruction files end to end: gated sections vs all files, blind graded', result: 'Answerable 23 of 24 gated (2 partial) vs 24 of 24; 0 wrong; abstained 6 of 6 in both. 1.5 s vs 1.8 s median; 1,042 vs 37,486 input tokens. Both partials add true details from sections the grader could not see. Strict miss by one point. $0.98', status: 'wait' },
+      { date: '2026-11-02', what: 'Stage 07 pilot: workspace-builder stages 01 to 05, 2 made-up domains, whole vs hand scope vs gate (2000 tokens), blind graded with all references', result: 'Audit checks: whole 48 of 50, hand 48 of 50, gate 45 of 50: quality bar fails. Gate loads 44% fewer reference tokens. Lost checks trace to the budget cutting critical rule sections, not to cutoffs. $7.86', status: 'wait' },
+      { date: '2026-11-02', what: 'Stage 07 rerun: gate-open (frozen cutoffs, no token budget) on the 4 tasks whose kept set changed', result: 'gate-open 47 of 50 vs hand 48 of 50: stage 01 back to 5 of 5; remaining gap is one stage 05 call-accuracy judgment whole also failed once. 31% fewer reference tokens than hand, 49% fewer than whole. $1.44, pilot total $9.30', status: 'ok' },
+      { date: '2026-11-02', what: 'Voice stage 2: gate + spoken answer, 23 questions, Opus 5.5 low vs Haiku 5.5', result: 'Gate 0.83 s median (search 13 ms, JEV 0.81 s; 0.21 s with more parallel JEV workers). First spoken sentence: Opus 1.9 s (19 of 20), Haiku 0.9 s (18.5 of 20). Unanswerables 3 of 3 declined. $0.26', status: 'ok' },
+      { date: '2026-11-02', what: 'Voice stage 3: live voice loop, gate over all three books (top 150 candidates, generic rubric wording), 22 spoken questions', result: 'Offline: gold kept 20 of 20, unanswerables kept nothing 14 of 18 (Haiku declined the other 4). Live: gate under 0.5 s, cannot-find reply in about 1 s, answers first audio 3.6 s median; follow-ups failed with no memory. $0.42', status: 'wait' },
+      { date: '2026-11-02', what: 'Voice stage 4: eager gate, conversation memory with follow-up rewrite, patient turn end, filler, barge-in, 17 spoken questions', result: 'First sound 0.95 s median (bar under 1 s: pass); first answer words about 3.0 s (bar 2.5 s: fail); 0 cut-offs on pauses up to 15 s. Follow-up rewrite found gold 12 of 12; recent-source boost added nothing and hurt when wrong, left off. Warm JEV pool costs about $1 an hour idle. $0.25, voice total $0.93', status: 'wait' },
+      { date: '2026-11-02', what: 'Stage 06 phase A: Quillmere memory stream, 122 tickets and call logs replayed in date order, 57 dated questions asked at their date, blind graded', result: '50 of 57 correct (88%, bar 95% fail); 2 stale, both records that state the next value early; 4 wrong merges (fail); hot facts 6 of 6. 192 facts in 73 groups; answer 1.7 s median. Claude $2.34, JEV $0.08.', status: 'wait' },
+      { date: '2026-11-02', what: 'Stage 06 phase A reruns on the stored facts: best-match grouping at link 0.5 (a2) and 0.9 (a3), 8 groups in the notes', result: 'a2 51 of 57, 2 stale, 4 wrong merges. a3 50 of 57, 2 stale, 0 wrong merges, but the old and new support numbers split into two groups and the answer hedged 3 times. $0.40 Claude each, phase A total $3.14', status: 'wait' },
+      { date: '2026-11-02', what: 'Stage 06 phase A run a4: canonical keys at extraction (the extractor reuses or names a key), JEV checks the key', result: '51 of 57 (89%, bar fail); 2 stale (early claims); 2 wrong merges, both lookalikes the extractor put under one key. Fixed retention offer, price lock, Glide cap and the support number split. $1.61 Claude, JEV $0.004; phase A total $4.75', status: 'wait' },
+      { date: '2026-11-06', what: 'Stage 06 phase A on a local model at $0: Qwen3.5-9B on llama.cpp (native Windows, about 6 GB of GPU) grades, extracts (a5, a6) and answers', result: 'Local grader on the a4 Claude answers: 52 of 57, agrees with Claude grades 42 of 44. a5 fully local: 30 of 57, the 9B returned no facts for 61 of 122 records. a6 adds one prompt line (most records state one to four facts): 103 facts, 42 of 57 (74%), 2 stale, 4 wrong merges, 11 abstained. $0 Claude', status: 'wait' },
+      { date: '2026-11-06', what: 'Stage 06 phase A local extraction tuning at $0: exact values plus a second pass for missed facts (a7), then extract without the held key list and name keys in a separate call (a8)', result: 'a7 41 of 57, 113 facts: no gain, because the held key list in the prompt halves what the 9B lists (8 vs 17 facts on 13 probe records). a8 139 facts, 48 of 57 (84%), 1 stale, 4 wrong merges, 5 abstained. Same local grader gives Claude extraction (a4) 52 of 57. $0 Claude', status: 'wait' },
+      { date: '2026-11-07', what: 'Stage 06 phase B fully local at $0: 33 SOP and governance versions written by code, 67 tickets citing them written by the 9B, phase A and B replayed together (222 records), source rank (an SOP in force outranks tickets), 58 questions', result: '47 of 58 (81%); stale citations 5 of 5, SOP-owned facts 23 of 27, ticket-only facts 11 of 13, document version in force 3 of 7. 3 stale, 4 wrong merges (the worst: five SOP-04 facts under one key). 500 facts. JEV $0.02, Claude $0', status: 'wait' },
+      { date: '2026-11-09', what: 'Stage 06 phase B rerun (b2) with SOP reading fixed: the 9B lists each document version as a fact and reads each numbered line as label and value, keys with the source line in view, and two facts of one record never share a key. Merge count fixed to stop counting a ticket citing a version as a wrong merge', result: '52 of 58 (90%, up from 47); document version in force 7 of 7 (was 3), SOP-owned facts 26 of 27, stale citations 4 of 5, ticket-only facts 10 of 13. Wrong merges 1 (month-to-month vs contract terms; b1 recounted: 7). 4 stale, all on facts with no SOP or a value a ticket stated before the SOP. JEV $0.03, Claude $0', status: 'wait' },
+      { date: '2026-11-09', what: 'Stage 06 phase C fully local at $0: 15 staff announcements (Calder fiber announced for 03-15, then moved to 04-01), 21 meeting notes (20 changes decided ahead, one floated $46 Spark price that never ships), 24 newsletters and 40 off-topic chatter threads written by the 9B, replayed on the phase B memory. Rank: SOP over announcement over ticket; a later notice that moves a start date wins', result: '53 of 58 (91%); early announcement 1 of 1, never valid 1 of 1, announced but not yet in force 9 of 10, SOP-owned 26 of 27, ticket-only 11 of 13. 1 stale (paperless credit), 1 wrong merge (month-to-month vs contract terms, unchanged). 5 of 100 records never passed the writing checks. JEV $0.04 total, Claude $0', status: 'wait' },
+      { date: '2026-11-02', what: 'Voice stage 5: free JEV keep-warm, rewrite only when no name is said, rewrite keeps named sources, attribution prompt, barge-in test, 18 spoken questions', result: 'Keep-warm: idle cost $0 (models.list rounds); first-question gate 3,968 ms to 468 ms with one $0.001 judge round at launch. Answer words to the voice 2.3 s median (about 2.6 s spoken, bar 2.5 s: still just over); Haiku first token 0.82 s. Barge-in: audio stops 0.40 s after speech starts (5 of 6). Rewrite tests 5 of 5. Mr. Brown attributed in 1 of 3, the gate still keeps the false accusation. $0.28, voice total $1.21', status: 'wait' },
+      { date: '2026-11-02', what: 'Voice stage 6: small talk path, vague follow-ups, number reading, short answers, story-ordered passages, model-decided barge-in, live test with interruptions and mm-hm', result: 'mm-hm ignored 3 of 3; interruptions stopped audio in 0.7 s on 7 of 9 (2 slow, cause unknown). Thanks answered without a search; vague follow-up resolved; years read as words. Mr. Brown right with Sonnet 5.5 (Haiku still wrong). Answer words about 2.5 s spoken: on the bar. Known questions 14 right vs 12, 0 wrong. JEV scoring goes cold after idle minutes (14.8 s once); a tiny round every 2.5 idle minutes keeps it warm for about 3 cents an hour. $0.38, voice total $1.59', status: 'ok' },
+      { date: '2026-11-06', what: 'Voice stage 7: 1911 Britannica (37,048 articles, 37.1M words, 210,592 passages), GPU index, GPU vector search, 40 random-article questions plus 8 unanswerables, flat vs summary-first', result: 'Index on GPU 1,503 passages/s (2 min 50 s; CPU would take about 5 h). Vector search 367 ms to 2 ms on the GPU, no installs; flat search 882 to 189 ms. Gate flat: gold in top 150 39 of 40, kept 37 of 40, unanswerables empty 8 of 8, 0.56 s median. Summary-first: kept 32 of 40, 0.29 s. Sonnet: 31 correct, 7 partial, 0 wrong, 2 abstained (the gate misses), 8 of 8 declined. First audio 2.9 s median. $0.48, voice total $2.07', status: 'ok' },
+      { date: '2026-11-15', what: 'Voice stage 8: turn-taking by sound. 116 recorded turns (409 boundaries, 293 pauses), stock Smart Turn baseline, prosody cues, Smart Turn v3.2 fine-tuned on Bee\'s voice plus 20,000 public clips', result: 'Stock (the int8 file the bot loads) on held-out turns: 82%, 9 false cut-offs, 8 missed ends of 93. Tuned: 86%, 5 cut-offs, 8 missed ends; other speakers 93% before and after. Hand-measured prosody added about 1 point on top of Smart Turn. Training 2 min on the 4090 from the v3.2 weights converted out of Pipecat\'s ONNX file. Tuned model 109 ms per decision vs 75 ms stock. $0', status: 'ok' },
+      { date: '2026-11-15', what: 'Voice stage 8 live turn test: stock vs Bee-tuned Smart Turn, 22 alternating questions, both models scoring every silence (171 silences, 15 real endings)', result: 'Every silence: bee 87% right vs stock 82%, cut-offs on pauses 13 vs 20, missed endings 9 vs 10 of 15. Reply after a caught ending 384 ms bee vs 352 ms stock. Small sample. Both miss most endings, so the 2.5 s fallback stays. Recommend bee as default. $0', status: 'ok' }
+    ],
+    rubrics: [
+      { id: 'smoke-relevance', version: 1, task: 'Why does the lighthouse keeper leave the island?',
+        q: 'relevance (Score)', levels: ['Unrelated to the task', 'Mentions the topic only', 'Partly answers the task', 'Directly answers the task'] },
+      { id: 'per-question rubric, e.g. secret-adversary/q07', version: 1, task: 'Who turns out to be Mr. Brown? (fact: who Mr. Brown really is; plus contains_fact critical Noul, evidence_form Choice, answerability Noul)',
+        q: 'relevance (Score), wording generated from the fact and topic of each question', levels: ['Unrelated to the question.', 'Shares words or names with the question but says nothing about the topic.', 'About the topic, but does not touch the fact.', 'Gives part of the fact, or strong clues to it.', 'States the fact plainly.'] },
+      { id: 'per-question rubric, second wording', version: 2, task: 'Same 10 questions (SA q03, q07, q12, n03; MS q05, q10, n04; WW q03, q10, q11) with the fact and level wording rewritten',
+        q: 'relevance (Score), same 4 questions, new wording', levels: ['Kept sets overlap 0.87 with v1 against 0.98 run-to-run noise', 'Gold outcome unchanged in 20 of 20 cases'] },
+      { id: 'memory-link', version: 1, task: 'A new statement about Quillmere Broadband vs each of its 20 nearest stored statements',
+        q: 'related (Score), same_attribute (Noul, critical, links at 0.5), same_value (Noul)', levels: ['About something else.', 'Same general topic, different attribute.', 'The same attribute of the same thing.'] }
+    ],
+    changes: [
+      ['Search ties', 'the stair-climbing passage tied the answering passage and won on alphabetical order. Ties now go to the vector ranking.'],
+      ['Keyword stemming', 'FTS5 now uses the Porter stemmer, so "climbing" finds "climbs".'],
+      ['Units module', 'Unit records and the 512-token cap got their own module; token counts are approximate until stage 02 stores real ones.'],
+      ['Test folder', 'pytest\'s default temp folder is locked on this PC; tests use hces/data/pytest-tmp, which git ignores.'],
+      ['Cost estimate', 'counting 4 characters per token undercounted a real JEV request by 3.4 times. The estimator is calibrated on real calls before any stage 03 batch.'],
+      ['Access time', 'about 1.7 s of 1.8 s was loading the embedder. Stage 03 keeps one embedder loaded across questions.'],
+      ['Batching', 'one JEV request took 1.7 s; at 50 candidates and 6 workers that is about 15 s per question. Stage 03 tests several passages per request.'],
+      ['Real token counts', 'passages are now measured with bge-small\'s own tokenizer, special tokens included, so the 512 cap means what the embedder means.'],
+      ['Contents lists', 'Gutenberg contents repeat every heading. A heading followed by under 300 characters is a contents entry or a group title, never a chapter.'],
+      ['Moonstone chapters', 'chapter numbers restart in each narrative, so chapters get sequential IDs and keep their group titles, e.g. SECOND PERIOD / THIRD NARRATIVE / CHAPTER II.'],
+      ['Passage text', 'not stored in passages.jsonl; offsets point into plain.txt. Halves the files on disk.'],
+      ['Gold as quotes', 'gold passages are written as evidence quotes and turned into IDs by code, so they survive a re-cut and exist for both shapes.'],
+      ['Needles inside passages', 'needles are planted before cutting, so they sit in ordinary passages; 9 decoys repeat a needle question\'s words without its answer.'],
+      ['Embedding batch size', 'fastembed memory grows with batch size times passage length: batch 64 peaked at 1,346 MB, batch 1 at 243 MB, same speed. embed.py uses batch 1.'],
+      ['fasttextembed not adopted', 'its tokenizer treats curly quotes differently, so vectors differ on book text; slower on long passages; saves only 36 MB.'],
+      ['k and the budget', 'at 6000 tokens RAG only keeps about 18 passages, so k above 20 changes what is retrieved, not what is kept. k matters for the JEV arm.'],
+      ['Judge once, reuse', 'judgments do not depend on k or variant, so each passage is judged once per question and every arm reuses them.'],
+      ['Budget rarely binds', 'with JEV in the loop the median context is about 1,000 tokens, against about 5,900 for RAG only.'],
+      ['Answer key gaps', 'JEV found strong non-gold passages for 9 of 12 answerable real-text questions; needles had none. Key v2 adds the ones that answer on their own and marks real lookalikes as decoys.'],
+      ['Rescore for free', 'report.py scores gold from stored decisions against the current key, so a key fix rescores old runs without new JEV calls.'],
+      ['Gold kept saturates', 'with the full gold set, hybrid RAG and JEV both keep gold 100% of the time. JEV\'s gain on this book is a 6x smaller context and correct not-in-docs flags. Stage 04 needs a stricter score.'],
+      ['JEV and lookalikes', 'JEV rates passages that look like an answer as holding the fact (Sir James accusing Julius; Tuppence calling Albert William). The second rubric at stage 04 should test this.'],
+      ['Answerability billing', 'answerability calls now record their billed tokens instead of an estimate.'],
+      ['Recall gain grows with size', 'gold kept saturates on the 100k-token book, but on Moonstone and Way We Live Now hybrid RAG keeps gold for 82 to 85% and RAG + JEV for 96 to 100%.'],
+      ['Retrieval is the ceiling', 'every RAG + JEV miss at the frozen cutoffs is a gold passage retrieval never put in the top 50; JEV never cut a retrieved gold passage.'],
+      ['Stricter cutoffs', 'frozen at score 0.75, no unsure band, fact p 0.9: median context falls from about 1,000 to 474 tokens with no recall loss.'],
+      ['Answerability weak', 'more kept text makes JEV say answerable, and it rates off-topic passages as holding a missing fact. Fresh unanswerable runs flagged: 1 of 6.'],
+      ['Rubric wording matters', 'rewording a rubric moves kept sets more than run-to-run noise (overlap 0.87 vs 0.98, lowest 0.25), but the gold outcome held in 20 of 20 cases. Wording changes which borderline passages survive, not whether the answer does.'],
+      ['The cutoff catches unanswerables', 'most unanswerable questions keep nothing at score 0.75, so they are flagged before the answerability question is asked. Misses come from the relevance judge scoring an off-topic passage high; rewording the answerability question cannot undo that.'],
+      ['The answerer is the last check', 'on the fresh unanswerables where JEV kept off-topic passages, Opus 5.5 still said not in the documents. The gate has to keep the gold passage; it does not have to be perfect at answerability.'],
+      ['Sections by heading', 'instruction files are cut at heading levels 1 to 3, code fences ignored; long sections split at blank lines, then line breaks. Each unit starts with its file path and heading trail.'],
+      ['Cutoffs carry over', 'the cutoffs frozen on novels kept every gold section of the instruction files with no retuning.'],
+      ['Grader needs the corpus', 'the grader sees only gold sections, so a true detail from elsewhere reads as unsupported; it judged the same kind of extra claim partial in one arm and correct in the other. Small bar gaps mean little until the grader can check the full corpus.'],
+      ['Rules are not facts', 'a stage task needs many rule sections, so a 2000-token budget dropped a 66-token critical list (no em dashes, whole-section conditionals). Layer 3 gating should use cutoffs without a token budget; the rerun recovered both rule failures. Short global rules belong with layers 0 to 2.'],
+      ['Hand scope where it exists', 'workspace-builder stage 02 scopes CONVENTIONS.md to two patterns by hand: 385 tokens, every check passed. Where an author scopes, that is cheaper than the gate.'],
+      ['Spoken questions name no source', 'a voice question does not say which book it is about, so the voice gate searches every source together with generic rubric wording; it still kept gold 20 of 20. The gate stays source-agnostic, with no per-source quotas.'],
+      ['Rewrite beats source boost', 'resolving he or she from the last turns before the gate found gold on every follow-up; boosting the last-used source added nothing and lost passages when it pointed at the wrong source. Boost code kept, off by default, for much larger libraries.'],
+      ['Gate speed is set by candidates, not library size', 'search is milliseconds; JEV time and cost scale with the candidate count. More parallel JEV workers cut 0.81 s to 0.21 s, but a warm connection pool has an idle cost (about $1 an hour) to fix.'],
+      ['Theories read as facts', 'a kept passage that holds a character theory (Julius as Mr. Brown) was stated as fact by the spoken answerer twice. The answer prompt must attribute claims to who makes them.'],
+      ['Memory groups cannot chain', 'joining every same_attribute link chained price lock and contract terms onto the stable month-to-month fact, and Glide\'s cap onto Spark\'s. Next: join a new fact to its single best match.'],
+      ['Reversion guard works, early claims do not', 'an old value needs 2 records to come back, which stopped every stale quote. A record that states the next value early still wins; that needs SOP effective dates (phase B) or a confirmation rule.'],
+      ['No single link cutoff', 'JEV rates lookalikes as the same attribute (contract term vs month-to-month 0.85) above some true changes (price lock 12 vs 24 months 0.81). At 0.9 nothing merges wrongly but changes split. Next: a canonical key per fact at extraction, checked by JEV.'],
+      ['Canonical keys', 'one key per attribute, reused by the extractor, fixed every split and chain failure; JEV became a cheap check ($0.004 a run). The extractor still puts some lookalikes under one key, and the growing key list raised extraction cost by half.'],
+      ['Local model grades and nearly extracts', 'a 9B on the home GPU grades as well as Claude, so grading is free. As extractor it now scores 48 of 57 against 52 for Claude under the same grader, at $0. What it took: tell it most records hold facts, ask a second time for what it missed, and keep the held key list out of the extraction prompt (name keys in a separate call), since the long list halves what it lists.'],
+      ['Source rank works', 'with an SOP version in force, memory takes its value over anything a ticket says: all 5 tickets quoting an outdated SOP version were answered with the version in force, and early ticket claims no longer win. Reading SOPs needed three prompt rules for the 9B: list the document version as a fact, read each numbered line as label and value, and never key two facts of one record alike. With them, versions in force went from 3 of 7 to 7 of 7 and phase B from 47 to 52 of 58.'],
+      ['Notices move dates, ideas do not ship', 'a start date in the future keeps the old value until it arrives (9 of 10 asked in between were right), a delay notice moves the start (Calder answered with the old towns between the announced and the real date), and an idea floated in meeting notes never displaced the SOP price. The 9B had to be held to writing values as digits and names: it wrote five dollars, and a delay notice that never named Calder, until the text check required both.'],
+      ['Warm connections, not servers', 'what goes cold is the pool of 50 JEV connections: about 16 s to reopen after 30 s of quiet. A free models.list call every 20 s keeps the pool open at no cost; one paid call keeps only one connection warm. The earlier $1 an hour was wrong: the old pings cost $0.19 an hour, the rest was eager gates rerunning on half-finished transcripts.'],
+      ['Lookalike accusations survive the gate', 'stage 5 blamed the gate for the Mr. Brown miss; stage 6 traced it: the gate kept the I am Mr. Brown reveal and 11 Emperor passages, and the answering model misread them. Not a gate fault.'],
+      ['Story order for the answerer', 'kept passages now arrive tagged with their source and position, in story order, with a rule that a later reveal beats an earlier accusation: known questions 14 correct vs 12, still 0 wrong. Haiku still names Julius; Sonnet 5.5 gets it right at the same speed for about $0.016 vs $0.0003 per answer, so the answer model is a setting.'],
+      ['Search moves to the GPU at scale', 'at 210k passages the SQLite vector and keyword search (0.9 s) became slower than JEV. Vectors held in GPU memory search in 2 ms; keyword search skips common words. JEV time and cost per question did not change with library size.'],
+      ['Thin summaries cannot route', 'summary-first search (title plus first paragraph) was twice as fast but lost 8 of 40 answers buried deep in articles. Flat search stays the default; richer summaries (section headings or a short generated summary) are the next try.'],
+      ['Speaker-tuned turn-taking beats hand cues', 'Bee\'s finished turns end higher in pitch and hesitations sag, the reverse of the textbook falling end; hand-measured prosody (pitch slope, lengthening, decay) added about 1 point on top of stock Smart Turn, while fine-tuning Smart Turn on 316 of Bee\'s boundaries mixed with 20,000 public clips raised held-out accuracy from 82% to 86% and halved cut-offs, without losing accuracy on other speakers.'],
+      ['Compare against the model actually deployed', 'the fine-tune started from Pipecat\'s full-precision gpu file (74% on Bee), but the bot loads the int8 cpu file (82%); the honest in-bot gain is 82 to 86%. Dynamic int8 quantisation of the tuned model made it slower (160 ms vs 109), not faster.']
+    ]
+  };
+  document.getElementById('measuredFacts').innerHTML = RESULTS.facts.map(function (f) {
+    return '<div class="fact"><b>' + f[0] + '</b><span>' + f[1] + '</span></div>';
+  }).join('');
+  document.getElementById('runCount').textContent = RESULTS.runs.length + ' entries';
+  document.getElementById('runLog').innerHTML = '<thead><tr><th>Date</th><th>Run</th><th>Result</th></tr></thead><tbody>' +
+    RESULTS.runs.map(function (r) {
+      return '<tr><td class="num mono">' + r.date + '</td><td>' + r.what + '</td><td class="' + r.status + '">' + r.result + '</td></tr>';
+    }).join('') + '</tbody>';
+  document.getElementById('rubrics').innerHTML = RESULTS.rubrics.map(function (r) {
+    return '<div class="rub"><b>' + r.id + ' v' + r.version + '</b><span style="font-size:.86rem;color:var(--muted)">Task: ' + r.task + '</span>' +
+      '<span style="font-size:.84rem">' + r.q + ', levels from 0:</span><ol>' +
+      r.levels.map(function (l, i) { return '<li><span>' + i + '</span><span>' + l + '</span></li>'; }).join('') + '</ol></div>';
+  }).join('');
+  document.getElementById('changes').innerHTML = RESULTS.changes.map(function (c) {
+    return '<li><b>' + c[0] + ':</b> ' + c[1] + '</li>';
+  }).join('');
+
+  /* Entities */
+  var ents = [
+    { n: 'Unit', w: 'kb/volumes, write once', f: [['id', 'pk'], ['source'], ['level'], ['parent_id', 'Unit'], ['start_char, end_char'], ['tokens', '512 max'], ['source_hash']], l: 'Parent of other Units; judged in Judgments' },
+    { n: 'Rubric', w: 'results.db', f: [['rubric_id + version', 'pk'], ['task'], ['questions', 'list'], ['hash']], l: 'Holds Questions; cited by every Judgment' },
+    { n: 'Question', w: 'inside a Rubric', f: [['key', 'pk'], ['type', 'Score, Noul, Choice'], ['instructions'], ['criteria or options'], ['weight'], ['critical', 'yes/no']], l: 'Answered once per Unit per run' },
+    { n: 'Run', w: 'results.db', f: [['run_id', 'pk'], ['arm, variant, k'], ['question_id'], ['budget, judge_model'], ['access_ms, analysis_ms'], ['response_ms, peak_rss_mb'], ['tokens_in, cost_usd']], l: 'Owns Judgments and Decisions' },
+    { n: 'Judgment', w: 'results.db, insert-only', f: [['run_id', 'Run'], ['unit_id', 'Unit'], ['rubric_id, version', 'Rubric'], ['question_key'], ['value'], ['model, tokens_in'], ['created_at']], l: 'One typed answer from the judge' },
+    { n: 'Decision', w: 'results.db + manifest', f: [['run_id', 'Run'], ['unit_id', 'Unit'], ['kept'], ['final_score'], ['rank'], ['reason']], l: 'What code did with each Unit, and why' }
+  ];
+  document.getElementById('entities').innerHTML = ents.map(function (e) {
+    return '<article class="entity"><header><h3>' + e.n + '</h3><span>' + e.w + '</span></header><ul class="fields">' +
+      e.f.map(function (f) { return '<li' + (f[1] === 'pk' ? ' class="pk"' : '') + '>' + f[0] + (f[1] && f[1] !== 'pk' ? '<span>' + f[1] + '</span>' : '') + '</li>'; }).join('') +
+      '</ul><footer>' + e.l + '</footer></article>';
+  }).join('');
+})();
+</script>

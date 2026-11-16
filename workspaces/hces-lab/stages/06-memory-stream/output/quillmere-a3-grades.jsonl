@@ -1,0 +1,57 @@
+{"id": "qa-q29", "verdict": "correct", "reason": "The answer gives the expected value: hourly credits once service has been down more than 4 hours. It mentions the older 24-hour rule only as the policy that was replaced.", "cost": 0.003348}
+{"id": "qa-q44", "verdict": "correct", "reason": "The answer matches the expected value: $0 on Torrent plans and $12 on all other plans.", "cost": 0.002772}
+{"id": "qa-q12", "verdict": "correct", "reason": "The answer gives a $2 per month credit, which matches the expected value.", "cost": 0.002548}
+{"id": "qa-q41", "verdict": "correct", "reason": "The answer gives $5/mo as the current discount, which matches the expected value. The $3 figure is mentioned only as the earlier amount.", "cost": 0.003016}
+{"id": "qa-q50", "verdict": "correct", "reason": "The answer gives $44 per month as the current price, which matches the expected value. It mentions the older $39 and $42 prices only as history.", "cost": 0.002972}
+{"id": "qa-q01", "verdict": "correct", "reason": "The answer states $25, which matches the expected value.", "cost": 0.002312}
+{"id": "qa-q57", "verdict": "correct", "reason": "The answer gives Free as the current cost. It mentions the $50 figure only as the earlier price.", "cost": 0.002732}
+{"id": "qa-q22", "verdict": "stale", "reason": "The answer lists cards and bank debit but also includes PayPal. PayPal matches the other-time value 'Adds PayPal', not the expected value for this date, which has no PayPal.", "cost": 0.003416}
+{"id": "qa-q09", "verdict": "correct", "reason": "The answer names Alder and Brook, which is the expected value. It does not add Calder or Dunmore.", "cost": 0.00282}
+{"id": "qa-q55", "verdict": "correct", "reason": "The answer gives 21 days, which matches the expected value. The earlier 30-day figure is mentioned only as a superseded value.", "cost": 0.002992}
+{"id": "qa-q17", "verdict": "abstained", "reason": "The answer gives both the expected number and the older one, and never commits to either as the support number. Because it says it is unclear which is the main line, this counts as not answering.", "cost": 0.00334}
+{"id": "qa-q39", "verdict": "correct", "reason": "The answer says there is no data cap as of the date asked, which matches the expected value. The 1.2 TB figure is mentioned only as the earlier value.", "cost": 0.00308}
+{"id": "qa-q11", "verdict": "correct", "reason": "The answer gives $10 per 50 GB, which matches the expected value.", "cost": 0.00256}
+{"id": "qa-q46", "verdict": "correct", "reason": "The answer names Script v2, which matches the expected value.", "cost": 0.002468}
+{"id": "qa-q20", "verdict": "correct", "reason": "The answer gives a flat $150 fee, which matches the expected value.", "cost": 0.002484}
+{"id": "qa-q30", "verdict": "correct", "reason": "The answer gives $100 as the current limit, which matches the expected value. It mentions $50 only as an earlier value, and as a separate credit limit.", "cost": 0.00316}
+{"id": "qa-q48", "verdict": "correct", "reason": "The answer says Glide 500 has no data cap, which is the expected value.", "cost": 0.002528}
+{"id": "qa-q23", "verdict": "correct", "reason": "The answer gives Tuesday from 1:00 to 4:00 AM, which matches the expected value. Calling it 'Tuesday nights' is ambiguous but still matches in substance.", "cost": 0.003352}
+{"id": "qa-q32", "verdict": "correct", "reason": "The answer gives $42 per month, which matches the expected value. The earlier $39 is mentioned only as historical context.", "cost": 0.002872}
+{"id": "qa-q25", "verdict": "correct", "reason": "The answer names the firmware 4.2 update as the current fix, which matches the expected value. It brings up power-cycling only as an older note and does not offer it as the fix.", "cost": 0.003464}
+{"id": "qa-q49", "verdict": "correct", "reason": "The answer gives $75 as the limit as of the question date, which matches the expected value. The $50 and $100 figures appear only as earlier history, not as the current limit.", "cost": 0.00324}
+{"id": "qa-q45", "verdict": "correct", "reason": "The answer places the head office in Alder, which matches the expected value.", "cost": 0.002492}
+{"id": "qa-q56", "verdict": "correct", "reason": "The answer gives 21 days as the refund window, which matches the expected value. It mentions 14 and 30 days only as earlier figures or as separate windows, not as the current refund window.", "cost": 0.00346}
+{"id": "qa-q40", "verdict": "correct", "reason": "The answer gives $30, which matches the expected value. It mentions the earlier $20 credit only as history, so the answer is not stale.", "cost": 0.002944}
+{"id": "qa-q18", "verdict": "correct", "reason": "The answer gives a 12-month price lock, which matches the expected value.", "cost": 0.002528}
+{"id": "qa-q37", "verdict": "correct", "reason": "The answer gives the expected value of 12 or 24 months for the question date. The conflicting month-to-month note is mentioned only as an aside and does not replace the main answer. That note is also not the other recorded value, '12 months only'.", "cost": 0.00368}
+{"id": "qa-q34", "verdict": "correct", "reason": "The answer gives 1 Gbps (1,000 Mbps), which matches the expected value.", "cost": 0.002756}
+{"id": "qa-q02", "verdict": "correct", "reason": "The answer gives $99, which matches the expected value. The extra detail about required professional installation does not contradict it.", "cost": 0.00282}
+{"id": "qa-q13", "verdict": "correct", "reason": "The answer names the firmware 4.2 update as the current fix, which matches the expected value. Its mention of power-cycling is only as the earlier advice that firmware 4.2 replaced.", "cost": 0.003608}
+{"id": "qa-q31", "verdict": "correct", "reason": "The answer names the QX-1, which matches the expected value for this date.", "cost": 0.002556}
+{"id": "qa-q19", "verdict": "correct", "reason": "The answer says a supervisor approves outage credits over $100, which matches the expected value.", "cost": 0.002632}
+{"id": "qa-q51", "verdict": "correct", "reason": "The answer gives the expected value, quillmere.example/status, as the current one. It mentions the older address only as history, so it counts as correct.", "cost": 0.003116}
+{"id": "qa-q15", "verdict": "correct", "reason": "The answer gives $59 per month, which matches the expected value.", "cost": 0.002424}
+{"id": "qa-q08", "verdict": "abstained", "reason": "The answer says the information is not in memory, so it declines to give a value.", "cost": 0.00242}
+{"id": "qa-q47", "verdict": "correct", "reason": "The answer names PayPal alongside cards and bank debit, so it reflects the expected value (PayPal added to the earlier methods).", "cost": 0.00312}
+{"id": "qa-q54", "verdict": "correct", "reason": "The answer gives 60 days as the current retention period, which matches the expected value. It mentions 90 days only as the earlier figure.", "cost": 0.002948}
+{"id": "qa-q36", "verdict": "correct", "reason": "The answer gives 30 days as the current refund window, which matches the expected value. It also mentions the earlier 14-day window and a separate 14-day window for plan-upgrade refunds, but neither of those is offered as the current main answer.", "cost": 0.003696}
+{"id": "qa-q43", "verdict": "correct", "reason": "The answer gives $8 per month as the current senior discount, which matches the expected value. It mentions the earlier $5 figure only as historical context.", "cost": 0.002984}
+{"id": "qa-q16", "verdict": "correct", "reason": "The answer says Lite 25 is open to new signups at $25/mo. That matches the expected value.", "cost": 0.00284}
+{"id": "qa-q52", "verdict": "correct", "reason": "The answer says callback within 24 hours, which matches the expected value. It mentions the earlier 48h value only as history.", "cost": 0.002916}
+{"id": "qa-q27", "verdict": "correct", "reason": "The answer says 3 extenders, which matches the expected value.", "cost": 0.002488}
+{"id": "qa-q28", "verdict": "correct", "reason": "The answer gives 8:00 a.m. to 8:00 p.m., which matches the expected value.", "cost": 0.00276}
+{"id": "qa-q06", "verdict": "correct", "reason": "The answer states a 14-day refund window, which matches the expected value.", "cost": 0.002472}
+{"id": "qa-q03", "verdict": "correct", "reason": "The answer gives support@quillmere.example, which matches the expected value. The added tip about the subject line does not change the fact.", "cost": 0.002864}
+{"id": "qa-q14", "verdict": "correct", "reason": "The answer names 4.2 as the current version, which matches the expected value. It hedges with \"most likely\", but it still commits to 4.2, and it mentions 4.1 only as an older figure.", "cost": 0.003536}
+{"id": "qa-q33", "verdict": "correct", "reason": "The answer gives the most recent rule as the operative one: hourly credits after 4 hours down. That matches the expected value. It mentions the older 24-hour rule only as conflicting background, not as the answer.", "cost": 0.003668}
+{"id": "qa-q53", "verdict": "correct", "reason": "The answer says Quillmere was founded in 2009, which matches the expected value.", "cost": 0.00248}
+{"id": "qa-q38", "verdict": "wrong", "reason": "The answer gives both the expected number (1-888-555-0177) and the older one (1-800-555-0142), presents both as current, and doesn't pick either. Because it hedges between the correct value and a stale one, it doesn't commit to the expected value.", "cost": 0.003884}
+{"id": "qa-q24", "verdict": "correct", "reason": "The answer gives $95 as the current fee, which matches the expected value. It mentions the older $75 fee only as a value that was replaced.", "cost": 0.003132}
+{"id": "qa-q07", "verdict": "correct", "reason": "The answer gives $5, which matches the expected value for that date.", "cost": 0.0024}
+{"id": "qa-q35", "verdict": "stale", "reason": "The answer gives 4.3, but the expected value as of 2026-08-12 is 4.2. Since 4.3 is one of the fact's values at another time, this is a stale answer, not a wrong one.", "cost": 0.003528}
+{"id": "qa-q05", "verdict": "correct", "reason": "The answer says one day's credit for each complete 24-hour outage, which matches the expected value.", "cost": 0.002832}
+{"id": "qa-q04", "verdict": "correct", "reason": "The answer gives $79 per month, which matches the expected value.", "cost": 0.002524}
+{"id": "qa-q42", "verdict": "abstained", "reason": "The answer says the information is not in memory, which is a statement of not knowing. It gives no router name.", "cost": 0.002588}
+{"id": "qa-q26", "verdict": "abstained", "reason": "The answer gives both the expected number and the older one, and it does not pick either as the support line. It says it cannot tell which is the main number, so it does not commit to an answer.", "cost": 0.003376}
+{"id": "qa-q10", "verdict": "correct", "reason": "The answer says agents ask for the last four digits of the Social Security number, which matches the expected value.", "cost": 0.002784}
+{"id": "qa-q21", "verdict": "correct", "reason": "The answer says 50 Mbps upload, which matches the expected value.", "cost": 0.002512}

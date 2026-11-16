@@ -29,3 +29,16 @@ desktop.ini
 
 # Cloned reference repos (local only)
 *-ref/
+
+# HCES: keep the lab's measured results; never commit local stores, logs or the Python environment
+!workspaces/hces-lab/stages/*/output/*
+.venv/
+__pycache__/
+*.pyc
+*.sqlite
+*.db
+*.db-wal
+*.db-shm
+hces/data/*
+!hces/data/.gitkeep
+workspaces/hces-lab/kb/index/
